@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInterestingFieldsTable extends Migration
+class CreatUsersAttachmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,12 @@ class CreateInterestingFieldsTable extends Migration
      */
     public function up()
     {
-        Schema::create('interesting_fields', function (Blueprint $table) {
+        Schema::create('users_attachments', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('field_name')->unique();
-            $table->string('image_name')->nullable();
-            $table->text('description')->nullable();
+            $table->string('user_attachment_name')->nullable();
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateInterestingFieldsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('interesting_Fields');
+        Schema::drop('users_attachments');
     }
 }

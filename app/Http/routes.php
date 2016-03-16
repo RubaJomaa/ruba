@@ -12,17 +12,31 @@
 */
 
 Route::get('/','indexController@index');    
-Route::get('/register','indexController@register');
-Route::get('/login','indexController@login');
-Route::get('/stepOne','setupController@stepOne');
-Route::get('/stepTwo','setupController@stepTwo');
-Route::get('/stepThree','setupController@stepThree');
+//Route::get('/register','indexController@register');
+//Route::get('/login','indexController@login');
+Route::get('/stepOne','setupController@getStepOne');
+Route::post('/stepOne','setupController@postStepOne');
+Route::get('/stepTwo','setupController@getStepTwo');
+Route::post('/stepOne','setupController@postStepTwo');
+Route::get('/stepThree','setupController@getStepThree');
+Route::post('/stepThree','setupController@postStepThree');
+            
 Route::get('/homePage','homeController@homePage');
 Route::get('/profile/{$username}','profileController@profile($username)');
 Route::get('/editProfileInfo/{$username}','profileController@editProfileInfo($username)');
+Route::post('/editProfileInfo/{$username}','profileController@postEditProfileInfo($username)');
 Route::get('/portfoilo/{$username}','profileController@portfoilo($username)');
 Route::get('/calender','homeController@calender');
 Route::get('/questions/{$questionID}','questionsController@answerQ($questionID)');
+
+
+//for password reset
+/*
+Route::get('/password/emial','Auth/PasswordController@getEmail');
+Route::post('/password/emial','Auth/PasswordController@postEmail');
+Route::get('/password/reset/{token}','Auth/PasswordController@getReset');
+Route::post('/password/reset','Auth/PasswordController@postReset');
+*/
 
 /*
 |--------------------------------------------------------------------------

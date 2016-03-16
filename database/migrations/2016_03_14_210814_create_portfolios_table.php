@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAttachmentsTable extends Migration
+class CreatePortfoliosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,16 @@ class CreateAttachmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_attachments', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('user_attachment_name')->nullable();
+        Schema::create('portfolios', function (Blueprint $table) {
+             $table->increments('id');
+            $table->Text('overview')->nullable();
+            $table->Text('skills')->nullable();
+            $table->Text('achievements')->nullable();
+            $table->Text('work_history')->nullable();
+            $table->Text('education')->nullable();
+            $table->Text('languages')->nullable();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
             $table->timestamps();
         });
     }
@@ -29,6 +33,6 @@ class CreateAttachmentsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('attachments');
+        Schema::drop('portfolios');
     }
 }
