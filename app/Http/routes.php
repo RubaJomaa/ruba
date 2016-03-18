@@ -50,16 +50,28 @@ Route::post('/password/reset','Auth/PasswordController@postReset');
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
-});
+
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
     Route::get('/home','HomeController@index');
-});
+    Route::get('/','indexController@index');    
+//Route::get('/register','indexController@register');
+//Route::get('/login','indexController@login');
+ // setup 
+Route::get('/setup/stepOne','setupController@getStepOne');
+Route::post('/setup/stepOne','setupController@postStepOne');
+Route::get('/setup/stepTwo','setupController@getStepTwo');
+Route::post('/setup/stepTwo','setupController@postStepTwo');
+Route::get('/setup/stepThree','setupController@getStepThree');
+Route::post('/setup/stepThree','setupController@postStepThree');
+        //     
+Route::get('/homePage','homeController@homePage');
+Route::get('/profile/{$username}','profileController@profile($username)');
+Route::get('/editProfileInfo/{$username}','profileController@editProfileInfo($username)');
+Route::post('/editProfileInfo/{$username}','profileController@postEditProfileInfo($username)');
+Route::get('/portfoilo/{$username}','profileController@portfoilo($username)');
+Route::get('/calender','homeController@calender');
+Route::get('/questions/{$questionID}','questionsController@answerQ($questionID)');
 
-Route::group(['middleware' => 'web'], function () {
-    Route::auth();
-    Route::get('/home','HomeController@index');
 });

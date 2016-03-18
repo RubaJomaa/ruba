@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB; 
-
+use Auth;
 class setupController extends Controller
 {
    
@@ -23,9 +23,10 @@ class setupController extends Controller
   }
     
     // to store the value of user interesting fields
-   public function postStepOne(){
+   public function postStepOne(Request $request){
         // how to deal with checkbox
-        return redirect('/setup/stepTwo');
+       
+        return redirect('/setup/stepTwo'); 
        
    }
     
@@ -42,18 +43,18 @@ class setupController extends Controller
          $work_history = $request->input('work_history'); 
          $education = $request->input('education');
          $languages = $request->input('languages');
-   
-         DB::table('portfolios')->insert(['overview'=>$overview , 'skills'=>$skills , 'achievements'=>$achievements ,'work_history'=>$work_history, 'education'=>$education,'languages'=>$languages ]);
+         $user_id = Auth::user()->id;
+         DB::table('portfolios')->insert(['overview'=>$overview , 'skills'=>$skills , 'achievements'=>$achievements ,'work_history'=>$work_history, 'education'=>$education,'languages'=>$languages , 'user_id'=>$user_id ]);
          return redirect('/setup/stepThree');
        
    }
     
-    /*
+    
      public function getStepThree(){
-       return view('stepThree');
+       return view('libraryViewsContainer.stepThree');
   }
     
-    
+    /*
     
     
      public function postStepThree(){

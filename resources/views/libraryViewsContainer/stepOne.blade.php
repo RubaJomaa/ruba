@@ -8,13 +8,14 @@
             <div class="panel panel-default">
              
          <form action="/setup/stepOne" method="post">
+             {!! csrf_field() !!}
         @foreach ($fields as $field)
         <div class="col-md-3">
             <div class="thumbnail">
-                <img  src="tableImg/{{$field->image_name}}" class="img-rounded" alt="Cinque Terre" width="304" height="236" >
+                <img  src="{{asset('tableImg/'.$field->image_name)}}" class="img-rounded" alt="Cinque Terre" width="304" height="236" >
                 <h1>
                     <div class="checkbox">
-                    <input type="checkbox">{{ $field->field_name }}
+                    <input type="checkbox" name="{{$field->field_name}}">{{ $field->field_name }}
                     </div>
                 </h1>         
     </div>
