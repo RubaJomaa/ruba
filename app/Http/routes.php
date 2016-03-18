@@ -14,13 +14,14 @@
 Route::get('/','indexController@index');    
 //Route::get('/register','indexController@register');
 //Route::get('/login','indexController@login');
-Route::get('/stepOne','setupController@getStepOne');
-Route::post('/stepOne','setupController@postStepOne');
-Route::get('/stepTwo','setupController@getStepTwo');
-Route::post('/stepOne','setupController@postStepTwo');
-Route::get('/stepThree','setupController@getStepThree');
-Route::post('/stepThree','setupController@postStepThree');
-            
+ // setup 
+Route::get('/setup/stepOne','setupController@getStepOne');
+Route::post('/setup/stepOne','setupController@postStepOne');
+Route::get('/setup/stepTwo','setupController@getStepTwo');
+Route::post('/setup/stepTwo','setupController@postStepTwo');
+Route::get('/setup/stepThree','setupController@getStepThree');
+Route::post('/setup/stepThree','setupController@postStepThree');
+        //     
 Route::get('/homePage','homeController@homePage');
 Route::get('/profile/{$username}','profileController@profile($username)');
 Route::get('/editProfileInfo/{$username}','profileController@editProfileInfo($username)');
