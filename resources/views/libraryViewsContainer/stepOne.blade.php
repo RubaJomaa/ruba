@@ -15,7 +15,7 @@
                 <img  src="{{asset('tableImg/'.$field->image_name)}}" class="img-rounded" alt="Cinque Terre" width="304" height="236" >
                 <h1>
                     <div class="checkbox">
-                    <input type="checkbox" name="{{$field->field_name}}">{{ $field->field_name }}
+                    <input type="checkbox" name="{{$field->field_name}}" value="{{$field->id}}">{{ $field->field_name }}
                     </div>
                 </h1>         
     </div>
