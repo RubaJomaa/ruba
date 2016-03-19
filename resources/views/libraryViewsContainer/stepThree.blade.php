@@ -9,8 +9,11 @@
                 {!! csrf_field() !!}
 
                 First Name : <input type="text" name="first_name"><br>
-                Last Name : <input type="text" name="last_name"><br>
-                Gender : <input type="text" name="sex"><br>
+                Last Name :  <input type="text" name="last_name"><br>
+                Gender :
+                            <input type="radio" name="gender" value="male"> Male<br>
+                            <input type="radio" name="gender" value="female"> Female<br>
+                            <input type="radio" name="gender" value="other"> Other <br>
                 Date Of Birth : <input type="" name="date_of_birth"><br>
                 Country : <input type="text" name="country"><br>
                 City : <input type="text" name="city"><br>

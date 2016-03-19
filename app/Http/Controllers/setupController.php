@@ -62,17 +62,18 @@ class setupController extends Controller
   }
 
 
-     public function postStepThree(Request $request){
+     public function postStepThree(Request $request ){
+
        $first_name = $request->input('first_name');
        $last_name =  $request->input('last_name');
-       $sex = $request->input('sex');
+       $gender = $request->gender;
        $country = $request->input('country');
        $city = $request->input('city');
        $date_of_birth = $request->input('date_of_birth');
        $address = $request->input('address');
        $birth_place = $request->input('birth_place');
        $user_id = Auth::user()->id;
-       DB::table('profiles_info')->insert(['first_name'=>$first_name , 'last_name'=>$last_name , 'sex'=>$sex , 'country'=>$country ,'city'=>$city , 'date_of_birth'=>$date_of_birth ,'address'=>$address , 'birth_place'=>$birth_place ,'user_id'=>$user_id  ]);
+       DB::table('profiles_info')->insert(['first_name'=>$first_name , 'last_name'=>$last_name , 'sex'=>$gender , 'country'=>$country ,'city'=>$city , 'date_of_birth'=>$date_of_birth ,'address'=>$address , 'birth_place'=>$birth_place ,'user_id'=>$user_id  ]);
        return redirect('/home');
   }
 }
