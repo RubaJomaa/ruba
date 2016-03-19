@@ -22,7 +22,7 @@ class CreateProfilesInfoTable extends Migration
             $table->string('city')->nullable();
             $table->string('address')->nullable();
             $table->string('birth_place')->nullable();
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unsigned()->unique();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

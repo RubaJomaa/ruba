@@ -20,7 +20,7 @@ class CreatePortfoliosTable extends Migration
             $table->Text('work_history')->nullable();
             $table->Text('education')->nullable();
             $table->Text('languages')->nullable();
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->unsigned()->unique();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

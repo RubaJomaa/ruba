@@ -65,7 +65,8 @@ Route::get('/setup/stepTwo','setupController@getStepTwo');
 Route::post('/setup/stepTwo','setupController@postStepTwo');
 Route::get('/setup/stepThree','setupController@getStepThree');
 Route::post('/setup/stepThree','setupController@postStepThree');
-        //     
+   //
+ 
 Route::get('/homePage','homeController@homePage');
 Route::get('/profile/{$username}','profileController@profile($username)');
 Route::get('/editProfileInfo/{$username}','profileController@editProfileInfo($username)');

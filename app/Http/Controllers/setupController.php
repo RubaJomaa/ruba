@@ -15,8 +15,21 @@ class setupController extends Controller
     }
 
      public function getStepOne(){
-      $fields = DB::table('interesting_fields')->get();
-      return view('libraryViewsContainer.stepOne')->withFields($fields);
+              $count=Auth::user()->setup_count;
+              if($count==0){
+             $fields = DB::table('interesting_fields')->get();
+             return view('libraryViewsContainer.stepOne')->withFields($fields);
+            }
+           elseif($count==1){
+             return redirect('/setup/stepTwo');
+           }
+           elseif($count==2){
+             return redirect('/setup/stepThree');
+           }
+           else {
+                return view('errors.404');
+           }
+
     }
 
     // to store the value of user interesting fields
@@ -24,6 +37,7 @@ class setupController extends Controller
      // TODO: if the inputs are the same , ignore them
         // how to deal with checkbox
        $user_id = Auth::user()->id;
+
        foreach( $request->all() as $key=>$value)
        {
            if ($key=='_token')
@@ -34,12 +48,30 @@ class setupController extends Controller
        $added = 1;
        DB::table('users_interests')->insert (['user_id'=> $user_id , 'interesting_field_id'=>$user_fields , 'added'=> $added ,'interactivity_factor'=> $interactivity_factor] );
        }
+       $count=Auth::user()->setup_count;
+       $countUp = $count + 1 ;
+       DB::table('users')->where('id', Auth::user()->id)->update(['setup_count' => $countUp ]);
        return redirect('/setup/stepTwo');
 
      }
 
      public function getStepTwo(){
-       return view('libraryViewsContainer.stepTwo'); // here we have the cv form
+       $count=Auth::user()->setup_count;
+      if($count==0){
+             return redirect('/setup/stepOne');
+        }
+     elseif($count==1){
+            return view('libraryViewsContainer.stepTwo'); // here we have the cv form
+
+       }
+     elseif($count==2){
+            return redirect('/setup/stepThree');
+      }
+     else {
+           return view('errors.404');
+    }
+
+
     }
 
      public function postStepTwo(Request $request){
@@ -52,13 +84,32 @@ class setupController extends Controller
          $languages = $request->input('languages');
          $user_id = Auth::user()->id;
          DB::table('portfolios')->insert(['overview'=>$overview , 'skills'=>$skills , 'achievements'=>$achievements ,'work_history'=>$work_history, 'education'=>$education,'languages'=>$languages , 'user_id'=>$user_id ]);
+         $count=Auth::user()->setup_count;
+         $countUp = $count + 1 ;
+         DB::table('users')->where('id', Auth::user()->id)->update(['setup_count' => $countUp ]);
          return redirect('/setup/stepThree');
 
    }
 
 
      public function getStepThree(){
-       return view('libraryViewsContainer.stepThree');
+
+       $count=Auth::user()->setup_count;
+       if($count==0){
+             return redirect('/setup/stepOne');
+        }
+       elseif($count==1){
+            return redirect('/setup/stepTwo');
+       }
+       elseif($count==2){
+           return view('libraryViewsContainer.stepThree');
+       }
+       else {
+           return view('errors.404');
+       }
+
+
+
   }
 
 
@@ -74,6 +125,9 @@ class setupController extends Controller
        $birth_place = $request->input('birth_place');
        $user_id = Auth::user()->id;
        DB::table('profiles_info')->insert(['first_name'=>$first_name , 'last_name'=>$last_name , 'sex'=>$gender , 'country'=>$country ,'city'=>$city , 'date_of_birth'=>$date_of_birth ,'address'=>$address , 'birth_place'=>$birth_place ,'user_id'=>$user_id  ]);
+       $count=Auth::user()->setup_count;
+       $countUp = $count + 1 ;
+       DB::table('users')->where('id', Auth::user()->id)->update(['setup_count' => $countUp ]);
        return redirect('/home');
   }
 }
