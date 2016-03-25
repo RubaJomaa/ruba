@@ -70,9 +70,7 @@ class setupController extends Controller
      else {
            return view('errors.404');
     }
-
-
-    }
+  }
 
      public function postStepTwo(Request $request){
 
@@ -108,12 +106,8 @@ class setupController extends Controller
            return view('errors.404');
        }
 
-
-
   }
-
-
-     public function postStepThree(Request $request ){
+   public function postStepThree(Request $request ){
 
        $first_name = $request->input('first_name');
        $last_name =  $request->input('last_name');

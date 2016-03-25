@@ -11,24 +11,37 @@
 |
 */
 
-Route::get('/','indexController@index');    
-//Route::get('/register','indexController@register');
-//Route::get('/login','indexController@login');
- // setup 
+Route::get('/','indexController@index');
+
+ // setup
 Route::get('/setup/stepOne','setupController@getStepOne');
 Route::post('/setup/stepOne','setupController@postStepOne');
 Route::get('/setup/stepTwo','setupController@getStepTwo');
 Route::post('/setup/stepTwo','setupController@postStepTwo');
 Route::get('/setup/stepThree','setupController@getStepThree');
 Route::post('/setup/stepThree','setupController@postStepThree');
-        //     
-Route::get('/homePage','homeController@homePage');
-Route::get('/profile/{$username}','profileController@profile($username)');
+        //
+//Route::get('/homePage','homeController@homePage');
+Route::get('/homePage','homeController@getHomePage'); // contain "ask" form and previous questions
+Route::post('/homePage','homeController@postQuestion'); //if i ask a question it will call this function
+Route::get('/question/{$questionID}','questionController@showQuestion'); // to show question if i want to see all answers or i want to answer it
+Route::post('/question/{$questionID}','questionController@postAnswer'); // if i answer this question
+
+Route::get('/profile/{$username}','profileController@getProfile($username)');
+Route::post('/profile/{$username}' ,' profileController@postProfile($username)');
 Route::get('/editProfileInfo/{$username}','profileController@editProfileInfo($username)');
 Route::post('/editProfileInfo/{$username}','profileController@postEditProfileInfo($username)');
-Route::get('/portfoilo/{$username}','profileController@portfoilo($username)');
-Route::get('/calender','homeController@calender');
-Route::get('/questions/{$questionID}','questionsController@answerQ($questionID)');
+//for CV
+Route::get('/portfolio','homeController@getPortfolio');
+Route::post('/portfolio','homeController@postPortfolio');
+//for user's questions Library
+Route::get('/myLibrary/{$username}','homeController@getLibrary');
+Route::post('/myLibrary/{$username}','homeController@postLibrary');
+//for calender
+Route::get('/calender','homeController@getCalender');
+Route::post('/calender','homeController@postCalender'); //for to do list
+
+// Route::get('/questions/{$questionID}','questionsController@answerQ($questionID)');
 
 
 //for password reset
@@ -55,10 +68,10 @@ Route::post('/password/reset','Auth/PasswordController@postReset');
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
     Route::get('/home','HomeController@index');
-    Route::get('/','indexController@index');    
+    Route::get('/','indexController@index');
 //Route::get('/register','indexController@register');
 //Route::get('/login','indexController@login');
- // setup 
+ // setup
 Route::get('/setup/stepOne','setupController@getStepOne');
 Route::post('/setup/stepOne','setupController@postStepOne');
 Route::get('/setup/stepTwo','setupController@getStepTwo');
@@ -66,13 +79,24 @@ Route::post('/setup/stepTwo','setupController@postStepTwo');
 Route::get('/setup/stepThree','setupController@getStepThree');
 Route::post('/setup/stepThree','setupController@postStepThree');
    //
- 
-Route::get('/homePage','homeController@homePage');
-Route::get('/profile/{$username}','profileController@profile($username)');
+
+Route::get('/homePage','homeController@getHomePage'); // contain "ask" form and previous questions
+Route::post('/homePage','homeController@postQuestion'); //if i ask a question it will call this function
+Route::get('/question/{$questionID}','questionController@showQuestion'); // to show question if i want to see all answers or i want to answer it
+Route::post('/question/{$questionID}','questionController@postAnswer'); // if i answer this question
+
+Route::get('/profile/{$username}','profileController@getProfile($username)');
+Route::post('/profile/{$username}' ,' profileController@postProfile($username)');
 Route::get('/editProfileInfo/{$username}','profileController@editProfileInfo($username)');
 Route::post('/editProfileInfo/{$username}','profileController@postEditProfileInfo($username)');
-Route::get('/portfoilo/{$username}','profileController@portfoilo($username)');
-Route::get('/calender','homeController@calender');
-Route::get('/questions/{$questionID}','questionsController@answerQ($questionID)');
+//for CV
+Route::get('/profile/{username}/portfolio','profileController@getPortfolio');
+Route::post('/profile/{username}/portfolio','profileController@postPortfolio');
+//for user's questions Library
+Route::get('/myLibrary/{$username}','homeController@getLibrary');
+Route::post('/myLibrary/{$username}','homeController@postLibrary');
+//for calender
+Route::get('/calender','homeController@getCalender');
+Route::post('/calender','homeController@postCalender'); //for to do list
 
 });
