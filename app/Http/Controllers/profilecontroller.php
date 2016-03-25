@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
+use Auth;
 class profilecontroller extends Controller
 {
      
@@ -17,9 +18,10 @@ class profilecontroller extends Controller
     
     
     public function getPortfolio(){
+         $username = Auth::username();
+        
          $fields = DB::table('portfolios')->get();
-        return $fields;
-         return view('libraryViewsContainer.portfolio')->withFields($fields);
+         return view('libraryViewsContainer.profile.portfolio')->withFields($fields);
     }
     
     public function portfoilo ($username){

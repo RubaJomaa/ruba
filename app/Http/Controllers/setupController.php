@@ -18,7 +18,7 @@ class setupController extends Controller
               $count=Auth::user()->setup_count;
               if($count==0){
              $fields = DB::table('interesting_fields')->get();
-             return view('libraryViewsContainer.stepOne')->withFields($fields);
+             return view('libraryViewsContainer.setup.stepOne')->withFields($fields);
             }
            elseif($count==1){
              return redirect('/setup/stepTwo');
@@ -61,7 +61,7 @@ class setupController extends Controller
              return redirect('/setup/stepOne');
         }
      elseif($count==1){
-            return view('libraryViewsContainer.stepTwo'); // here we have the cv form
+            return view('libraryViewsContainer.setup.stepTwo'); // here we have the cv form
 
        }
      elseif($count==2){
@@ -100,7 +100,7 @@ class setupController extends Controller
             return redirect('/setup/stepTwo');
        }
        elseif($count==2){
-           return view('libraryViewsContainer.stepThree');
+           return view('libraryViewsContainer.setup.stepThree');
        }
        else {
            return view('errors.404');
