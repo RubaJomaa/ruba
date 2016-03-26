@@ -13,14 +13,14 @@
 /*
 Route::get('/','indexController@index');
 
- // setup
+// setup
 Route::get('/setup/stepOne','setupController@getStepOne');
 Route::post('/setup/stepOne','setupController@postStepOne');
 Route::get('/setup/stepTwo','setupController@getStepTwo');
 Route::post('/setup/stepTwo','setupController@postStepTwo');
 Route::get('/setup/stepThree','setupController@getStepThree');
 Route::post('/setup/stepThree','setupController@postStepThree');
-        //
+//
 //Route::get('/homePage','homeController@homePage');
 Route::get('/homePage','homeController@getHomePage'); // contain "ask" form and previous questions
 Route::post('/homePage','homeController@postQuestion'); //if i ask a question it will call this function
@@ -66,32 +66,38 @@ Route::post('/password/reset','Auth/PasswordController@postReset');
 
 
 Route::group(['middleware' => 'web'], function () {
-    Route::auth();
-    //  Route::get('/home','HomeController@index');
-    //  Route::get('/','indexController@index');
-   //Route::get('/login','indexController@login');
-   // setup
-    Route::get('/setup/stepOne','setupController@getStepOne');
-    Route::post('/setup/stepOne','setupController@postStepOne');
-    Route::get('/setup/stepTwo','setupController@getStepTwo');
-    Route::get('/setup/stepThree','setupController@getStepThree');
-    Route::post('/setup/stepThree','setupController@postStepThree');
-   //
+  Route::auth();
+  Route::get('/home','HomeController@index');
+  Route::get('/','indexController@index');
+  //Route::get('/login','indexController@login');
+  // setup
+  Route::get('/setup/stepOne','setupController@getStepOne');
+  Route::post('/setup/stepOne','setupController@postStepOne');
+  Route::get('/setup/stepTwo','setupController@getStepTwo');
+  Route::post('/setup/stepTwo','setupController@postStepTwo');
+  Route::get('/setup/stepThree','setupController@getStepThree');
+  Route::post('/setup/stepThree','setupController@postStepThree');
+  //
 
-    Route::post('/homePage','homeController@postQuestion'); //if i ask a question it will call this function
-    Route::get('/question/{$questionID}','questionController@showQuestion'); // to show question if i want to see all answers or i want to answer it
-    Route::post('/question/{$questionID}','questionController@postAnswer'); // if i answer this question
+  //  Route::post('/homePage','homeController@postQuestion'); //if i ask a question it will call this function
+  //  Route::get('/question/{questionID}','questionController@showQuestion'); // to show question if i want to see all answers or i want to answer it
+  //  Route::post('/question/{questionID}','questionController@postAnswer'); // if i answer this question
 
-    Route::post('/profile/{$username}' ,' profileController@postProfile($username)');
-    Route::post('/editProfileInfo/{$username}','profileController@postEditProfileInfo($username)');
-    //for CV
-    Route::get('/profile/{username}/portfolio','profileController@getPortfolio');
-    Route::post('/profile/{username}/portfolio','profileController@postPortfolio');
-    //for user's questions Library
-    Route::get('/myLibrary/{$username}','homeController@getLibrary');
-    Route::post('/myLibrary/{$username}','homeController@postLibrary');
-    //for calender
-    Route::get('/calender','homeController@getCalender');
-    Route::post('/calender','homeController@postCalender'); //for to do list
+  //for profile
+  Route::get('/profile/{username}' ,'profileController@getProfile');
+  Route::get('/profile/{username}/profile-info','profileController@getProfileInfo');
+  Route::post('/profile/{username}/profile-info' ,'profileController@storeProfileInfo');
+  Route::patch('/profile/{username}/profile-info' ,'profileController@updateProfileInfo');
+  //  Route::post('/profile/{username}/profile-info','profileController@postProfileInfo'); // i may need patch instead
+
+  //for CV
+  //  Route::get('/profile/{username}/portfolio','profileController@getPortfolio');
+  //  Route::post('/profile/{username}/portfolio','profileController@postPortfolio');
+  //for user's questions Library
+  //  Route::get('/myLibrary/{$username}','homeController@getLibrary');
+  //  Route::post('/myLibrary/{$username}','homeController@postLibrary');
+  //for calender
+  //  Route::get('/calender','homeController@getCalender');
+  //  Route::post('/calender','homeController@postCalender'); //for to do list
 
 });
