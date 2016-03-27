@@ -17,7 +17,6 @@
                 Languages: <textarea rows="2" cols="30" name="languages"></textarea><br>
 
     <footer><h1 class="col-md-3 col-offset-3">
-
     <input type="submit" value="Next Step">
     <a href="/home" type="button" >skip setup </a> 
          </h1>

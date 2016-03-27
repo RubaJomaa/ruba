@@ -94,6 +94,8 @@ Route::group(['middleware' => 'web'], function () {
   Route::get('/profile/{username}/portfolio','profileController@getPortfolio');
   Route::post('/profile/{username}/portfolio','profileController@storePortfolio');
   Route::patch('/profile/{username}/portfolio','profileController@updatePortfolio');
+  //for attachments
+  Route::post('/profile/{username}/portfolio/attach', 'profileController@attacheToPortfolio');
 
   //for contacts info
   Route::get('/profile/{username}/contact-info','profileController@getContact');

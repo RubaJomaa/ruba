@@ -61,6 +61,16 @@
         @endif
         @endif
       </div>
+      @if($isMe)
+      <form action="/profile/{{$username}}/portfolio/attache" method="post" enctype="multipart/form-data">
+         {!! csrf_field() !!}
+        <input type="file" name="filename">
+        <input type="submit">
+    </form>
+      @endif
+    <?php // TODO: show attacment  ?>
+
+    <?php // TODO: url down  ?>
       <a href="/profile/{{$username}}" > Back </a>
     </div>
   </div>
