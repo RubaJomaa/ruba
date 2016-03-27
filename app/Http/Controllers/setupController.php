@@ -10,6 +10,7 @@ use DB;
 use Auth;
 class setupController extends Controller
 {
+  // TODO: validation and session to pop up msgs to endicate if things done correctly or not 
     public function __construct(){
         $this->middleware('auth');
     }

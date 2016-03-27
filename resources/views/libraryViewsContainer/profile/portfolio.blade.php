@@ -11,17 +11,17 @@
         @if($infors)
         <script type="text/javascript">
         $(document).ready(function(){
-          $('input').css({display: 'none'});
+          $('textarea').css({display: 'none'});
           $('#cancelEditButton').css({display: 'none'});
 
           $('#editButton').click(function(){
-            $('input').css({display: 'inline-block'});
+            $('textarea').css({display: 'inline-block'});
             $('.field').css({display: 'none'});
             $('#cancelEditButton').css({display:'inline-block'});
           });
 
           $('#cancelEditButton').click(function(){
-            $('input').css({display: 'none'});
+            $('textarea').css({display: 'none'});
             $('.field').css({display: 'inline-block'});
             $('#cancelEditButton').css({display: 'none'});
           });
