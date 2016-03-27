@@ -9,7 +9,7 @@
         <div class="panel-heading">Dashboard</div>
         <!-- this anchor is to redirect to the profile -->
         <a href="{{URL('/profile/'.Auth::user()->name )}}"> {{Auth::user()->name}} </a><br>
-        <a href="{{URL('/profile/'.Auth::user()->name .'/portfolio')}}"> Portfolio </a>
+    
 
       </div>
     </div>

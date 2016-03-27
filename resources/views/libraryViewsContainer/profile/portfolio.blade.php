@@ -6,24 +6,64 @@
   <div class="container-fluid">
     <div class="col-md-10 col-md-offset-1">
       <div class="panel panel-default">
-        <!--form method="get" action="/profile/".Auth::user->username()"/portfolio">
-        {!! csrf_field() !!}
-        Overview : <textarea rows="3" cols="30" name="overview" contenteditable="false"> {{$fields->overview}} </textarea><br>
-        Skills : <textarea rows="3" cols="30" name="skills" contenteditable="false">  {{$fields->skills}} </textarea><br>
-        Achievements: <textarea rows="3" cols="30" name="achievements" contenteditable="false">  {{$fields->achievements}} </textarea><br>
-        Work History: <textarea rows="3" cols="30" name="work_history" contenteditable="false">  {{$fields->work_history}} </textarea><br>
-        Education: <textarea rows="3" cols="30" name="education" contenteditable="false">  {{ $fields->education }} </textarea><br>
-        Languages: <textarea rows="2" cols="30" name="languages" contenteditable="false">  {{ $fields->languages }}</textarea><br>
+        <div class="panel-heading">Dashboard</div>
+        {{$username}} <br>
+        @if($infors)
+        <script type="text/javascript">
+        $(document).ready(function(){
+          $('input').css({display: 'none'});
+          $('#cancelEditButton').css({display: 'none'});
 
-        <footer><h1 class="col-md-3 col-offset-3">
-        <a href="/home" class="button">Ok </a><br>
-        <a href="/portfolioEdit" class="button">Edit </a><br>
-      </h1>
-    </footer>
-  </form -->
-</div>
-</div>
-</div>
+          $('#editButton').click(function(){
+            $('input').css({display: 'inline-block'});
+            $('.field').css({display: 'none'});
+            $('#cancelEditButton').css({display:'inline-block'});
+          });
+
+          $('#cancelEditButton').click(function(){
+            $('input').css({display: 'none'});
+            $('.field').css({display: 'inline-block'});
+            $('#cancelEditButton').css({display: 'none'});
+          });
+
+
+        })
+        </script>
+        @if($isMe)
+        <button id="editButton" type="button" name="button">edit</button>
+        <button id="cancelEditButton" type="button" name="button">cancel</button>
+        @endif
+        <form method="post" action="/profile/{{$username}}/portfolio">
+          {!! csrf_field() !!}
+          <input type="hidden" name="_method" value="PATCH">
+          Overview : <textarea rows="3" cols="30" name="overview" > {{$infors->overview}}</textarea> <span class="field"> {{$infors->overview}} </span> <br>
+          Skills : <textarea rows="3" cols="30" name="skills">{{$infors->skills}}</textarea> <span class="field"> {{$infors->skills}} </span>  <br>
+          Achievements: <textarea rows="3" cols="30" name="achievements" > {{$infors->achievements}}</textarea> <span class="field"> {{$infors->achievements}} </span><br>
+          Work History: <textarea rows="3" cols="30" name="work_history"> {{$infors->work_history}}</textarea> <span class="field"> {{$infors->work_history}} </span><br>
+          Education: <textarea rows="3" cols="30" name="education">{{$infors->education}}</textarea> <span class="field"> {{$infors->education}} </span><br>
+          Languages: <textarea rows="2" cols="30" name="languages"> {{$infors->languages}}</textarea><span class="field"> {{$infors->languages}} </span><br>
+          <input type="submit" value="update">
+        </form>
+        @else
+        @if($isMe)
+        <form action="/profile/{{$username}}/portfolio" method="post" >
+          {!! csrf_field() !!}
+          Overview : <textarea rows="3" cols="30" name="overview" placeholder="say something about your self" > </textarea><br>
+          Skills : <textarea rows="3" cols="30" name="skills" placeholder="ex.web programming"></textarea><br>
+          Achievements: <textarea rows="3" cols="30" name="achievements" placeholder="ex.your success" ></textarea><br>
+          Work History: <textarea rows="3" cols="30" name="work_history" placeholder="ex.places where you work"></textarea><br>
+          Education: <textarea rows="3" cols="30" name="education" placeholder="ex.your university name"></textarea><br>
+          Languages: <textarea rows="2" cols="30" name="languages" placeholder="ex.english"></textarea><br>
+          <input type="submit" value="store" >
+        </form>
+        @else
+        this user have no information
+        @endif
+        @endif
+      </div>
+      <a href="/profile/{{$username}}" > Back </a>
+    </div>
+  </div>
 </div>
 
 @endsection

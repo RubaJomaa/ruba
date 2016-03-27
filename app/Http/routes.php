@@ -85,14 +85,22 @@ Route::group(['middleware' => 'web'], function () {
 
   //for profile
   Route::get('/profile/{username}' ,'profileController@getProfile');
+  //for profile info
   Route::get('/profile/{username}/profile-info','profileController@getProfileInfo');
   Route::post('/profile/{username}/profile-info' ,'profileController@storeProfileInfo');
   Route::patch('/profile/{username}/profile-info' ,'profileController@updateProfileInfo');
-  //  Route::post('/profile/{username}/profile-info','profileController@postProfileInfo'); // i may need patch instead
 
-  //for CV
-  //  Route::get('/profile/{username}/portfolio','profileController@getPortfolio');
-  //  Route::post('/profile/{username}/portfolio','profileController@postPortfolio');
+  //for CV in profile
+  Route::get('/profile/{username}/portfolio','profileController@getPortfolio');
+  Route::post('/profile/{username}/portfolio','profileController@storePortfolio');
+  Route::patch('/profile/{username}/portfolio','profileController@updatePortfolio');
+
+  //for contacts info
+  Route::get('/profile/{username}/contact-info','profileController@getContact');
+  Route::post('/profile/{username}/contact-info','profileController@storeContact');
+  Route::patch('/profile/{username}/contact-info','profileController@updateContact');
+
+
   //for user's questions Library
   //  Route::get('/myLibrary/{$username}','homeController@getLibrary');
   //  Route::post('/myLibrary/{$username}','homeController@postLibrary');
