@@ -69,7 +69,7 @@
     </form>
       @endif
     <?php // TODO: show attacment  ?>
-
+   <?php // TODO: the form not only have a file , it is also havr a title  ?>
     <?php // TODO: url down  ?>
       <a href="/profile/{{$username}}" > Back </a>
     </div>
