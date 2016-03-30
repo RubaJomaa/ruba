@@ -11,21 +11,24 @@
           {!! csrf_field() !!}
           @foreach ($fields as $field)
           <div class="col-md-3">
-            <div class="thumbnail">
-              <img  src="{{asset('tableImg/'.$field->image_name)}}" class="img-rounded" alt="Cinque Terre" width="304" height="236" >
-              <h1>
+
+              <!--img  src="{{asset('tableImg/'.$field->image_name)}}" class="img-rounded" alt="Cinque Terre" width="304" height="236" -->
+
                 <div class="checkbox">
+                  <h1>
                   <input type="checkbox" name="{{$field->field_name}}" value="{{$field->id}}">{{ $field->field_name }}
+                </h1>
+
                 </div>
-              </h1>
+
             </div>
-          </div>
+
           @endforeach
 
           <footer>
             <h1 class="col-md-3 col-offset-3">
               <input type="submit" value="Next Step">
-              <a href="/home" type="button" >skip setup </a> 
+
             </h1>
           </footer>
         </form>

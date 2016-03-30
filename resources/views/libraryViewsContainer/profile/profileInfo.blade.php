@@ -48,6 +48,15 @@
           Address: <input type="text"  name="address" value="{{$infos->address}} "> <span class="field">{{$infos->address}} </span> <br>
           Birth Place: <input type="text"  name="birth_place" value="{{$infos->birth_place}}"> <span class="field">{{$infos->birth_place}} </span> <br>
           <input type="submit" value="update" >
+          @if (count($errors) > 0)
+            <div class="alert alert-danger">
+            <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+              </ul>
+            </div>
+           @endif
         </form>
 
         @else
@@ -65,6 +74,15 @@
           Address: <input type="text"  name="address" placeholder="ex.main street" > <br>
           Birth Place: <input type="text" name="birth_place" placeholder="ex.jenin">  <br>
           <input type="submit" value="store" >
+          @if (count($errors) > 0)
+            <div class="alert alert-danger">
+            <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+              </ul>
+            </div>
+           @endif
         </form>
         @else
         this user have no information

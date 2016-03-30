@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Illuminate\Http\Response;
+
+use Illuminate\Http\Request;
+use App\User_attachment;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
@@ -20,6 +25,7 @@ class profilecontroller extends Controller
 
   public function getPortfolio($username)
   {
+    $entries = User_attachment::all();
     $user = $this -> checkUsername($username);
     if(!$user)
     return view('errors.404');
@@ -29,20 +35,27 @@ class profilecontroller extends Controller
       if($user->id == Auth::user()->id)
       $isMe=true;
       $infors= \App\Portfolio::where('user_id',$user->id)->first();
-      return view('libraryViewsContainer.profile.portfolio', compact(['username','infors','isMe']));
+
+      $attaches= \App\User_attachment::where('user_id',$user->id)->first();
+      return view('libraryViewsContainer.profile.portfolio', compact(['username','infors','isMe','entries','attaches']));
     }
   }
   public function storePortfolio(Request $request , $username)
   {
     $user = $this->checkUsername($username);
-
+    $this->validate($request, [
+    'skills' => 'required',
+    'overview' => 'required',
+    'achievements' => 'required',
+    'education' => 'required',
+    ]);
     if(!$user)
     return view('errors.404');
     else
     {
 
       if($user->id != Auth::user()->id)
-      return view('errors.404');//you can create a 401 page (unauthorized)
+      return view('errors.401');//you can create a 401 page (unauthorized)
 
       $portfolio = new \App\Portfolio;
       $portfolio->user_id = $user->id;
@@ -64,14 +77,19 @@ class profilecontroller extends Controller
   public function updatePortfolio(Request $request , $username)
   {
     $user = $this->checkUsername($username);
-
+    $this->validate($request, [
+    'skills' => 'required',
+    'overview' => 'required',
+    'achievements' => 'required',
+    'education' => 'required',
+    ]);
     if(!$user)
     return view('errors.404');
     else
     {
 
       if($user->id != Auth::user()->id)
-      return view('errors.404');//you can create a 401 page (unauthorized)
+      return view('errors.401');//you can create a 401 page (unauthorized)
 
       $portfolio= \App\Portfolio::where('user_id' , $user->id)->first();
       $portfolio->overview = $request->overview;
@@ -128,7 +146,11 @@ class profilecontroller extends Controller
   public function storeProfileInfo(Request $request , $username)
   {
     $user = $this->checkUsername($username);
-
+    $this->validate($request, [
+    'first_name' => 'required',
+    'last_name' => 'required',
+    'country' => 'required',
+    ]);
     if(!$user)
     return view('errors.404');
     else
@@ -157,7 +179,11 @@ class profilecontroller extends Controller
   public function updateProfileInfo(Request $request , $username)
   {
     $user = $this->checkUsername($username);
-
+    $this->validate($request, [
+    'first_name' => 'required',
+    'last_name' => 'required',
+    'country' => 'required',
+    ]);
     if(!$user)
     return view('errors.404');
     else
@@ -208,7 +234,11 @@ class profilecontroller extends Controller
 
       if($user->id != Auth::user()->id)
       return view('errors.401');//you can create a 401 page (unauthorized)
-
+      $this->validate($request, [
+      'email' => 'required',
+      'phone_number' => 'required|integer',
+      'telephone_number' => 'required|integer',
+      ]);
       $contact = new \App\Contact;
       $contact->user_id = $user->id;
       $contact->email = $request->email;
@@ -223,7 +253,11 @@ class profilecontroller extends Controller
   public function updateContact(Request $request , $username)
   {
     $user = $this->checkUsername($username);
-
+    $this->validate($request, [
+      'email' => 'required',
+      'phone_number' => 'required|integer',
+      'telephone_number' => 'required|integer',
+    ]);
     if(!$user)
     return view('errors.404');
     else
@@ -243,7 +277,34 @@ class profilecontroller extends Controller
   }
   public function attacheToPortfolio($username , Request $request)
   {
-
+    $img=false;
+    $user = $this->checkUsername($username);
+    $file = $request->file('filename');
+		$extension = $file->getClientOriginalExtension();
+		Storage::disk('local')->put($file->getFilename().'.'.$extension,  File::get($file));
+		$entry = new User_attachment();
+    $entry->user_id = $user->id;
+    if($extension=='jpg' || $extension=='gif' || $extension=='png' ||$extension=='JPG' || $extension=='GIF' || $extension=='PNG' )
+    {
+      $name=$file->getFilename().'.'.$extension;
+      $entry->path= 'img/album/'.$name;
+      $file->move('img/album/', $name);
+    }
+	  $entry->mimi_type  =$file->getClientMimeType();
+		$entry->user_attachment_name = $file->getClientOriginalName();
+		$entry->title = $file->getFilename().'.'.$extension;
+		$entry->save();
+		return back();
   }
+
+  public function download($title){
+
+		$entry = User_attachment::where('title', '=', $title)->firstOrFail();
+		$file = Storage::disk('local')->get($entry->title);
+
+		return (new Response($file, 200))
+              ->header('Content-Type', $entry->mimi_type);
+
+	}
 
 }

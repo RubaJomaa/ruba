@@ -18,7 +18,7 @@
 
     <footer><h1 class="col-md-3 col-offset-3">
     <input type="submit" value="Next Step">
-    <a href="/home" type="button" >skip setup </a> 
+    <a href="{{url('/home')}}" type="button" >skip setup </a> 
          </h1>
     </footer>
                  </form>

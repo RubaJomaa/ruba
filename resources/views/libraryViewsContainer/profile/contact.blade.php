@@ -29,6 +29,7 @@
 
         })
         </script>
+          
         @if($isMe)
         <button id="editButton" type="button" name="button">edit</button>
         <button id="cancelEditButton" type="button" name="button">cancel</button>
@@ -37,10 +38,19 @@
           {!! csrf_field() !!}
           <input type="hidden" name="_method" value="PATCH">
           Email: <input type="email" name="email" value="{{$cinfos->email}}">  <span class="field"> {{$cinfos->email}}</span><br>
-          Phone Number: <input type="number" name="phone_number" value="{{$cinfos->phone_number}}" >  <span class="field">{{$cinfos->phone_number}}</span><br>
+          Phone Number: <input type="tel" name="phone_number" value="{{$cinfos->phone_number}}" >  <span class="field">{{$cinfos->phone_number}}</span><br>
           Telephone Number: <input type="tel" name="telephone_number" value="{{$cinfos->telephone_number}}"> <span class="field"> {{$cinfos->telephone_number}} </span> <br>
           <input type="submit" value="update" >
         </form>
+         @if (count($errors) > 0)
+            <div class="alert alert-danger">
+            <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+            </ul>
+           </div>
+          @endif
 
         @else
         @if($isMe)
@@ -50,6 +60,16 @@
           Phone Number: <input type="tel" name="phone_number" placeholder="0599-659-588" > <br>
           Telephone Number: <input type="tel" name="telephone_number" placeholder="04-2466-648">  <br>
           <input type="submit" value="store" >
+            @if (count($errors) > 0)
+            <div class="alert alert-danger">
+            <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+              </ul>
+            </div>
+           @endif
+
         </form>
         @else
         this user have no information
