@@ -101,18 +101,22 @@
   </ul>
 </div-->
 @if( $attaches)
+<h1> File list</h1>
+@foreach($entries as $entry)
 @if($entry-> mimi_type == 'image/png' ||$entry=='image/jpeg' || $entry=='image/gif' ||$entry=='image/JPEG' || $entry=='image/GIF' || $entry=='image/PNG' )
- <h1> Pictures list</h1>
+
  <div class="row">
         <ul class="thumbnails">
-
-
             <div class="col-md-2">
+              <li>
+                <ul>
                 <div class="thumbnail">
                     <img src="{{asset($entry->path)}}" alt="ALT NAME" class="img-responsive" />
                     <div class="caption">
                         <p>{{$entry->user_attachment_name}}</p>
                     </div>
+                  </ul>
+                </li>
 
                 </div>
             </div>
@@ -120,13 +124,12 @@
  </ul>
  </div>
  @else
- <h1> Files list</h1>
 
       <div class="col-md-2">
                   <p>{{$entry->user_attachment_name}}</p><br>
       </div>
-
  @endif
+ @endforeach
  @endif
 
    <?php // TODO: سعاد اعمليها :  كبسة تفتح بوب اب لرفع الفايل  ?>
