@@ -29,7 +29,7 @@
 
         })
         </script>
-          
+
         @if($isMe)
         <button id="editButton" type="button" name="button">edit</button>
         <button id="cancelEditButton" type="button" name="button">cancel</button>
@@ -42,15 +42,15 @@
           Telephone Number: <input type="tel" name="telephone_number" value="{{$cinfos->telephone_number}}"> <span class="field"> {{$cinfos->telephone_number}} </span> <br>
           <input type="submit" value="update" >
         </form>
-         @if (count($errors) > 0)
-            <div class="alert alert-danger">
-            <ul>
+        @if (count($errors) > 0)
+        <div class="alert alert-danger">
+          <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+            <li>{{ $error }}</li>
             @endforeach
-            </ul>
-           </div>
-          @endif
+          </ul>
+        </div>
+        @endif
 
         @else
         @if($isMe)
@@ -60,15 +60,15 @@
           Phone Number: <input type="tel" name="phone_number" placeholder="0599-659-588" > <br>
           Telephone Number: <input type="tel" name="telephone_number" placeholder="04-2466-648">  <br>
           <input type="submit" value="store" >
-            @if (count($errors) > 0)
-            <div class="alert alert-danger">
+          @if (count($errors) > 0)
+          <div class="alert alert-danger">
             <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-              </ul>
-            </div>
-           @endif
+              @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+          @endif
 
         </form>
         @else
@@ -76,7 +76,7 @@
         @endif
         @endif
       </div>
-        <a href="/profile/{{$username}}" > Back </a>
+      <a href="/profile/{{$username}}" > Back </a>
     </div>
   </div>
 </div>

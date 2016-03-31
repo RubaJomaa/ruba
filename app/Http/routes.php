@@ -96,6 +96,8 @@ Route::group(['middleware' => 'web'], function () {
   Route::patch('/profile/{username}/portfolio','profileController@updatePortfolio');
   //for attachments
   Route::post('/profile/{username}/portfolio/attach', 'profileController@attacheToPortfolio');
+  Route::get('/profile/{username}/portfolio/download', 'profileController@download');
+
 
   //for contacts info
   Route::get('/profile/{username}/contact-info','profileController@getContact');
