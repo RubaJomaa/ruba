@@ -69,19 +69,24 @@ Route::group(['middleware' => 'web'], function () {
   Route::auth();
   Route::get('/home','HomeController@index');
   Route::get('/','indexController@index');
-  //Route::get('/login','indexController@login');
-  // setup
+  //setup
   Route::get('/setup/stepOne','setupController@getStepOne');
   Route::post('/setup/stepOne','setupController@postStepOne');
   Route::get('/setup/stepTwo','setupController@getStepTwo');
   Route::post('/setup/stepTwo','setupController@postStepTwo');
   Route::get('/setup/stepThree','setupController@getStepThree');
   Route::post('/setup/stepThree','setupController@postStepThree');
-  //
 
-  //  Route::post('/homePage','homeController@postQuestion'); //if i ask a question it will call this function
-  //  Route::get('/question/{questionID}','questionController@showQuestion'); // to show question if i want to see all answers or i want to answer it
-  //  Route::post('/question/{questionID}','questionController@postAnswer'); // if i answer this question
+  //for questions and answers
+  Route::post('/home','homeController@postQuestion'); //if i ask a question it will call this function
+  Route::get('/question/{questionID}','questionController@getQuestion'); // to show questions
+  Route::patch('/question/{questionID}','questionController@editQuestion'); //if i post a question then i want to edit it
+  Route::delete('/question/{questionID}','questionController@deleteQuestion'); // if i want to delete my question
+  Route::get('/question/{questionID}/answers','questionController@getAnswers');// to show answers of specific question
+  Route::post('/question/{questionID}/answers','questionController@postAnswer');// to answer a specific question
+  Route::delete('/question/{questionID}/answers','questionController@deleteAnswer');// to delete answer
+  Route::patch('/question/{questionID}/answers','questionController@editAnswer');// to edit your answer
+
 
   //for profile
   Route::get('/profile/{username}' ,'profileController@getProfile');
@@ -106,8 +111,9 @@ Route::group(['middleware' => 'web'], function () {
 
 
   //for user's questions Library
-  //  Route::get('/myLibrary/{$username}','homeController@getLibrary');
-  //  Route::post('/myLibrary/{$username}','homeController@postLibrary');
+ //Route::get('/myLibrary/{$username}','homeController@getLibrary');
+ //Route::post('/myLibrary/{$username}','homeController@postLibrary');
+
   //for calender
   //  Route::get('/calender','homeController@getCalender');
   //  Route::post('/calender','homeController@postCalender'); //for to do list

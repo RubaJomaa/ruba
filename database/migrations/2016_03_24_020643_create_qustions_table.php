@@ -15,14 +15,10 @@ class CreateQustionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
             $table->longtext('question');
-            //images
-            //code
-            //file 
             $table->integer('user_id')->unsigned()->unique();
             $table->integer('interesting_field_id')->unsigned();
             $table->boolean('answered')->default(false);
             $table->boolean('addedToLibrary')->default(false);
-
             $table->timestamps();
         });
     }

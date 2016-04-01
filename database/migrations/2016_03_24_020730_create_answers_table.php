@@ -18,6 +18,8 @@ class CreateAnswersTable extends Migration
             $table->longtext('answer');
             $table->integer('question_id')->unsigned()->unique();
             $table->integer('like_id')->unsigned()->unique();
+            $table->integer('number_of_likes');
+            $table->boolean('king_answer');
             $table->timestamps();
         });
     }

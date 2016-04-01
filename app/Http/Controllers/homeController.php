@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Interesting_field;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -17,8 +18,8 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
-    
-    
+
+
     /**
      * Show the application dashboard.
      *
@@ -26,6 +27,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
-    }
+
+        $fields = DB::table('interesting_fields')->get();
+        return view('home',compact(['fields']));
+
+}
+
 }
