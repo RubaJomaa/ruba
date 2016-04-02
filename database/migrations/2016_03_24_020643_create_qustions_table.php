@@ -14,11 +14,14 @@ class CreateQustionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
-            $table->longtext('question');
-            $table->integer('user_id')->unsigned()->unique();
-            $table->integer('interesting_field_id')->unsigned();
+            $table->integer('question_file_middle_id')->unsigned();
+            $table->foreign('question_file_middle_id')->references('id')->on('questions_files_middle')->onDelete('cascade');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->longtext('question_body');
+            $table->text('topic');
             $table->boolean('answered')->default(false);
-            $table->boolean('addedToLibrary')->default(false);
+            $table->string('title');
             $table->timestamps();
         });
     }

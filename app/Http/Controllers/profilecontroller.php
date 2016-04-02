@@ -76,12 +76,7 @@ class profilecontroller extends Controller
   public function updatePortfolio(Request $request , $username)
   {
     $user = $this->checkUsername($username);
-    $this->validate($request, [
-      'skills' => 'required',
-      'overview' => 'required',
-      'achievements' => 'required',
-      'education' => 'required',
-    ]);
+
     if(!$user)
     return view('errors.404');
     else
@@ -146,9 +141,9 @@ class profilecontroller extends Controller
   {
     $user = $this->checkUsername($username);
     $this->validate($request, [
-      'first_name' => 'required',
-      'last_name' => 'required',
-      'country' => 'required',
+      'first_name' => 'required|max:15',
+      'last_name' => 'required|max:15',
+      'country' => 'required|max:20',
     ]);
     if(!$user)
     return view('errors.404');
@@ -156,7 +151,7 @@ class profilecontroller extends Controller
     {
 
       if($user->id != Auth::user()->id)
-      return view('errors.401');//you can create a 401 page (unauthorized)
+      return view('errors.401');
 
       $profile_info = new \App\ProfileInfo;
       $profile_info->user_id = $user->id;
@@ -179,9 +174,9 @@ class profilecontroller extends Controller
   {
     $user = $this->checkUsername($username);
     $this->validate($request, [
-      'first_name' => 'required',
-      'last_name' => 'required',
-      'country' => 'required',
+      'first_name' => 'required|max:15',
+      'last_name' => 'required|max:15',
+      'country' => 'required|max:15',
     ]);
     if(!$user)
     return view('errors.404');
@@ -289,13 +284,17 @@ class profilecontroller extends Controller
       $entry->path= 'img/album/'.$name;
       $file->move('img/album/', $name);
     }
+    else{
+      $name=$file->getFilename().'.'.$extension;
+      $file->move('files/', $name);
+    }
     $entry->mimi_type  =$file->getClientMimeType();
     $entry->user_attachment_name = $file->getClientOriginalName();
     $entry->title = $file->getFilename().'.'.$extension;
     $entry->save();
     return back();
   }
-
+/*
   public function download($user_attachment_name){
 
     $entry = User_attachment::where('user_attachment_name', '=', $user_attachment_name)->firstorFail();
@@ -305,5 +304,5 @@ class profilecontroller extends Controller
     return (response($file, 200)->header('Content-Type', $entry->mimi_type));
    return back();
   }
-
+*/
 }

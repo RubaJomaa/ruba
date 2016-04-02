@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLikesTable extends Migration
+class CreateQuestionsFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,11 @@ class CreateLikesTable extends Migration
      */
     public function up()
     {
-        Schema::create('likes', function (Blueprint $table) {
+        Schema::create('questions_files', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreign('answer_id')->references('id')->on('answers')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+          //$table->integer('question_file_middle_id')->unsigned();
+          //$table->foreign('question_file_middle_id')->references('id')->on('questions_files_middle')->onDelete('cascade');
+            $table->string('file_name');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateLikesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('likes');
+        Schema::drop('questions_files');
     }
 }

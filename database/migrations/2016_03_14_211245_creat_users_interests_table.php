@@ -18,7 +18,6 @@ class CreatUsersInterestsTable extends Migration
             $table->integer('interesting_field_id')->unsigned();
             $table->integer('interactivity_factor')->default(0);
             $table->boolean('added')->default(false);
-            
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('interesting_field_id')->references('id')->on('interesting_fields')->onDelete('cascade');
             $table->timestamps();

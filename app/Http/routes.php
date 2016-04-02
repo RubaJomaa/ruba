@@ -101,7 +101,7 @@ Route::group(['middleware' => 'web'], function () {
   Route::patch('/profile/{username}/portfolio','profileController@updatePortfolio');
   //for attachments
   Route::post('/profile/{username}/portfolio/attach', 'profileController@attacheToPortfolio');
-  Route::get('/profile/{username}/portfolio/download', 'profileController@download');
+  //Route::get('/profile/{username}/portfolio/download', 'profileController@download');
 
 
   //for contacts info
@@ -111,8 +111,8 @@ Route::group(['middleware' => 'web'], function () {
 
 
   //for user's questions Library
- //Route::get('/myLibrary/{$username}','homeController@getLibrary');
- //Route::post('/myLibrary/{$username}','homeController@postLibrary');
+  //Route::get('/myLibrary/{$username}','homeController@getLibrary');
+  //Route::post('/myLibrary/{$username}','homeController@postLibrary');
 
   //for calender
   //  Route::get('/calender','homeController@getCalender');

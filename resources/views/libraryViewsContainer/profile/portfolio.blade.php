@@ -97,14 +97,14 @@
   @foreach($entries as $entry)
   @if($entry-> mimi_type == 'image/png' || $entry->mimi_type=='image/jpeg' || $entry->mimi_type=='image/gif' ||$entry->mimi_type=='image/JPEG' || $entry->mimi_type=='image/GIF' || $entry->mimi_type=='image/PNG' )
 
-  <div class="row">
+  <div class="row tableRow" >
     <ul class="thumbnails">
       <div class="col-md-6">
         <table>
           <tbody>
             <tr>
               <td>
-                  <img src="{{asset($entry->path)}}" alt="ALT NAME" class="img-responsive" />
+                  <img src="{{asset($entry->path)}}" alt="ALT NAME" class="img-responsive" width="100" height="100" onmouseover="style=width:400px; height:400px;"/>
                   <div class="caption">
                     <p>{{$entry->user_attachment_name}}</p>
                   </div>
@@ -125,9 +125,8 @@
               <div class="col-md-6">
                 <form action="/profile/{{$username}}/portfolio/download" method="get">
                   {!! csrf_field() !!}
-                  <p>{{$entry->user_attachment_name}}</p><br>
-
-                  <input type="submit" value="download">
+                  <div class="row tableRow">
+                  <a href="files/{{$entry->title}}" download>{{$entry->user_attachment_name}}</a><div><br>
                 </form>
 
               </div>
