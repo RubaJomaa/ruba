@@ -14,8 +14,6 @@ class CreateQuestionsFilesTable extends Migration
     {
         Schema::create('questions_files', function (Blueprint $table) {
             $table->increments('id');
-          //$table->integer('question_file_middle_id')->unsigned();
-          //$table->foreign('question_file_middle_id')->references('id')->on('questions_files_middle')->onDelete('cascade');
             $table->string('file_name');
             $table->timestamps();
         });
