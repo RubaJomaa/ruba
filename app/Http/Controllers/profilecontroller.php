@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
@@ -21,7 +19,6 @@ class profilecontroller extends Controller
     $this->middleware('auth');
   }
 
-
   public function getPortfolio($username)
   {
     $entries = User_attachment::all();
@@ -36,10 +33,11 @@ class profilecontroller extends Controller
       $infors= \App\Portfolio::where('user_id',$user->id)->first();
 
       $attaches= \App\User_attachment::where('user_id',$user->id)->first();
-      return view('libraryViewsContainer.profile.portfolio', compact(['username','infors','isMe','entries','attaches']));
+      return view('viewsContainer.profile.portfolio', compact(['username','infors','isMe','entries','attaches']));
     }
   }
-  public function storePortfolio(Request $request , $username)
+
+  public function storePortfolio(Request $request, $username)
   {
     $user = $this->checkUsername($username);
     $this->validate($request, [
@@ -73,7 +71,7 @@ class profilecontroller extends Controller
 
   }
 
-  public function updatePortfolio(Request $request , $username)
+  public function updatePortfolio(Request $request, $username)
   {
     $user = $this->checkUsername($username);
 
@@ -85,7 +83,7 @@ class profilecontroller extends Controller
       if($user->id != Auth::user()->id)
       return view('errors.401');//you can create a 401 page (unauthorized)
 
-      $portfolio= \App\Portfolio::where('user_id' , $user->id)->first();
+      $portfolio= \App\Portfolio::where('user_id', $user->id)->first();
       $portfolio->overview = $request->overview;
       $portfolio->skills = $request->skills;
       $portfolio->achievements = $request->achievements;
@@ -97,32 +95,17 @@ class profilecontroller extends Controller
     }
   }
 
-  public function getProfile($username){
+  public function getProfile($username)
+  {
     $user = $this ->  checkUsername($username);
     if(!$user)
     return view('errors.404');
     else
-    return view('libraryViewsContainer.profile.userProfile', compact(['username']));
+    return view('viewsContainer.profile.userProfile', compact(['username']));
   }
 
-  function checkUsername($username)
+  public function getProfileInfo($username)
   {
-    if(Auth::user()->name == $username)
-    {
-      $user = Auth::user();
-    }
-    else
-    {
-      $user = \App\User::where('name', $username)->first();
-      if(!$user)
-      return false;
-    }
-
-    return $user;
-  }
-
-  public function getProfileInfo($username){
-
     $user = $this -> checkUsername($username);
     if(!$user)
     return view('errors.404');
@@ -132,12 +115,12 @@ class profilecontroller extends Controller
       if($user->id == Auth::user()->id)
       $isMe=true;
       $infos= \App\ProfileInfo::where('user_id',$user->id)->first();
-      return view('libraryViewsContainer.profile.profileInfo', compact(['username','infos','isMe']));
+      return view('viewsContainer.profile.profileInfo', compact(['username','infos','isMe']));
 
     }
   }
 
-  public function storeProfileInfo(Request $request , $username)
+  public function storeProfileInfo(Request $request, $username)
   {
     $user = $this->checkUsername($username);
     $this->validate($request, [
@@ -170,7 +153,7 @@ class profilecontroller extends Controller
     }
   }
 
-  public function updateProfileInfo(Request $request , $username)
+  public function updateProfileInfo(Request $request, $username)
   {
     $user = $this->checkUsername($username);
     $this->validate($request, [
@@ -186,7 +169,7 @@ class profilecontroller extends Controller
       if($user->id != Auth::user()->id)
       return view('errors.401');//you can create a 401 page (unauthorized)
 
-      $profile_info = \App\ProfileInfo::where('user_id' , $user->id)->first();
+      $profile_info = \App\ProfileInfo::where('user_id', $user->id)->first();
       $profile_info->first_name = $request->first_name;
       $profile_info->last_name = $request->last_name;
       $profile_info->date_of_birth = $request->date_of_birth;
@@ -212,13 +195,13 @@ class profilecontroller extends Controller
       if($user->id == Auth::user()->id)
       $isMe=true;
       $cinfos= \App\Contact::where('user_id',$user->id)->first();
-      return view('libraryViewsContainer.profile.contact', compact(['username','cinfos','isMe']));
+      return view('viewsContainer.profile.contact', compact(['username','cinfos','isMe']));
 
     }
   }
-  public function storeContact(Request $request , $username)
-  {
 
+  public function storeContact(Request $request, $username)
+  {
     $user = $this->checkUsername($username);
 
     if(!$user)
@@ -244,7 +227,7 @@ class profilecontroller extends Controller
 
   }
 
-  public function updateContact(Request $request , $username)
+  public function updateContact(Request $request, $username)
   {
     $user = $this->checkUsername($username);
     $this->validate($request, [
@@ -269,40 +252,70 @@ class profilecontroller extends Controller
       return back();
     }
   }
-  public function attacheToPortfolio($username , Request $request)
+
+  public function attachToPortfolio($username, Request $request)
   {
-    $img=false;
     $user = $this->checkUsername($username);
+
+    if($user->id != Auth::user()->id)
+      return view('errors.401');
+
+    $img = false;
     $file = $request->file('filename');
     $extension = $file->getClientOriginalExtension();
-    Storage::disk('local')->put($file->getFilename().'.'.$extension,  File::get($file));
     $entry = new User_attachment();
     $entry->user_id = $user->id;
-    if($extension=='jpg' || $extension=='gif' || $extension=='png' ||$extension=='JPG' || $extension=='GIF' || $extension=='PNG' )
+
+    if(
+      $extension == 'jpg' ||
+      $extension == 'gif' ||
+      $extension == 'png' ||
+      $extension == 'JPG' ||
+      $extension == 'GIF' ||
+      $extension == 'PNG'
+    )
     {
-      $name=$file->getFilename().'.'.$extension;
-      $entry->path= 'img/album/'.$name;
-      $file->move('img/album/', $name);
+      $name = $file->getFilename().'.'.$extension;
+      $entry->path = 'users_attachments/images/'.$name;
+      $file->move('users_attachments/images/', $name);
     }
     else{
       $name=$file->getFilename().'.'.$extension;
-      $file->move('files/', $name);
+      $file->move('users_attachments/files/', $name);
     }
-    $entry->mimi_type  =$file->getClientMimeType();
+
+    $entry->mimi_type  = $file->getClientMimeType();
     $entry->user_attachment_name = $file->getClientOriginalName();
     $entry->title = $file->getFilename().'.'.$extension;
     $entry->save();
     return back();
   }
-/*
+
+  function checkUsername($username)
+  {
+    if(Auth::user()->name == $username)
+    {
+      $user = Auth::user();
+    }
+    else
+    {
+      $user = \App\User::where('name', $username)->first();
+      if(!$user)
+      return false;
+    }
+
+    return $user;
+  }
+
+  /*
   public function download($user_attachment_name){
 
-    $entry = User_attachment::where('user_attachment_name', '=', $user_attachment_name)->firstorFail();
-    return $entry;
-    $file = Storage::disk('local')->get($entry->title);
+  $entry = User_attachment::where('user_attachment_name', '=', $user_attachment_name)->firstorFail();
+  return $entry;
+  $file = Storage::disk('local')->get($entry->title);
 
-    return (response($file, 200)->header('Content-Type', $entry->mimi_type));
-   return back();
-  }
+  return (response($file, 200)->header('Content-Type', $entry->mimi_type));
+  return back();
+}
 */
 }

@@ -18,7 +18,8 @@ class CreateLikesTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('answer_id')->references('id')->on('answers')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('count')->default(0);
+            // $table->integer('count')->default(0);// count of what? this should be deleted, because this table
+            //is a table of each like instance, you can't say this like instance is 40!
             $table->timestamps();
         });
     }

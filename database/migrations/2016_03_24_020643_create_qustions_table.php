@@ -17,9 +17,11 @@ class CreateQustionsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->longtext('question_body');
-            $table->text('topic');
+            $table->integer('topic_id');
+          //  $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade'); //هاااد سطر ابن كلب :( 
             $table->boolean('answered')->default(false);
             $table->string('title');
+            $table->integer('answers_count')->unsigned();//i have added this, to indicate the number of answers for this question
             $table->timestamps();
         });
     }

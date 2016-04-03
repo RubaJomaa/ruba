@@ -10,7 +10,7 @@ use DB;
 use Auth;
 class setupController extends Controller
 {
-  // TODO: validation and session to pop up msgs to endicate if things done correctly or not 
+  // TODO: validation and session to pop up msgs to endicate if things done correctly or not
     public function __construct(){
         $this->middleware('auth');
     }
@@ -18,8 +18,8 @@ class setupController extends Controller
      public function getStepOne(){
               $count=Auth::user()->setup_count;
               if($count==0){
-             $fields = DB::table('interesting_fields')->get();
-             return view('libraryViewsContainer.setup.stepOne')->withFields($fields);
+             $fields = DB::table('topics')->get();
+             return view('viewsContainer.setup.stepOne')->withFields($fields);
             }
            elseif($count==1){
              return redirect('/setup/stepTwo');
@@ -47,7 +47,7 @@ class setupController extends Controller
        $interactivity_factor = 0 ;
        $user_fields = $value ;
        $added = 1;
-       DB::table('users_interests')->insert (['user_id'=> $user_id , 'interesting_field_id'=>$user_fields , 'added'=> $added ,'interactivity_factor'=> $interactivity_factor] );
+       DB::table('users_topics')->insert (['user_id'=> $user_id , 'topic_id'=>$user_fields , 'added'=> $added ,'interactivity_factor'=> $interactivity_factor] );
        }
        $count=Auth::user()->setup_count;
        $countUp = $count + 1 ;
@@ -62,7 +62,7 @@ class setupController extends Controller
              return redirect('/setup/stepOne');
         }
      elseif($count==1){
-            return view('libraryViewsContainer.setup.stepTwo'); // here we have the cv form
+            return view('viewsContainer.setup.stepTwo'); // here we have the cv form
 
        }
      elseif($count==2){
@@ -101,7 +101,7 @@ class setupController extends Controller
             return redirect('/setup/stepTwo');
        }
        elseif($count==2){
-           return view('libraryViewsContainer.setup.stepThree');
+           return view('viewsContainer.setup.stepThree');
        }
        else {
            return view('errors.404');

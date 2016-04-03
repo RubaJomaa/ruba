@@ -5,8 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>ASK WORLD</title>
+    <script src="{{asset('/ckeditor/ckeditor.js')}}"></script>
     <script   src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
+    
+     <script type="text/javascript">
+  $(document).ready(function(){
+    $('#get').click(function(){
+      var data = CKEDITOR.instances.editor1.getData();//this code gets the edited content, use it with you share the question
+      $('#content').append(data);
+    });
+  });
+  </script>
+    
+    
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
@@ -23,6 +35,13 @@
         .fa-btn {
             margin-right: 6px;
         }
+        
+       
+         #cke_editor1
+         {
+            width: 500px;
+           }
+
     </style>
 </head>
 <body id="app-layout">

@@ -25,97 +25,97 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        DB::table('interesting_fields')->insert([
-            'field_name' => 'Computer Engineering',
+        DB::table('topics')->insert([
+            'topic_name' => 'Computer Engineering',
           //  'image_name' => 'web.jpg',
             //'description'=> 'you will recieve questions about everything related to web programming and development'
         ]);
 
-        DB::table('interesting_fields')->insert([
-            'field_name' => 'Medicine and Healthcare',
+        DB::table('topics')->insert([
+            'topic_name' => 'Medicine and Healthcare',
             //'image_name' => 'mobile.jpg',
           //  'description'=> 'you will recieve questions about everything related to mobiles'
         ]);
 
-        DB::table('interesting_fields')->insert([
-            'field_name' => 'Books and Writing',
+        DB::table('topics')->insert([
+            'topic_name' => 'Books and Writing',
           //  'image_name' => 'sw.jpg',
         //    'description'=> 'you will recieve questions about everything related to software'
         ]);
 
-        DB::table('interesting_fields')->insert([
-            'field_name' => 'Healthy Eating & Food',
+        DB::table('topics')->insert([
+            'topic_name' => 'Healthy Eating & Food',
           //  'image_name' => 'nw.jpg',
           //  'description'=> 'you will recieve questions about everything related to networks'
         ]);
 
-        DB::table('interesting_fields')->insert([
-            'field_name' => 'Electrical Engineering',
+        DB::table('topics')->insert([
+            'topic_name' => 'Electrical Engineering',
             //'image_name' => 'science.jpg',
             //'description'=> 'you will recieve questions about everything related to all types of science'
         ]);
 
-         DB::table('interesting_fields')->insert([
-            'field_name' => 'Economics',
+         DB::table('topics')->insert([
+            'topic_name' => 'Economics',
           //  'image_name' => 'design.jpg',
           //  'description'=> 'you will recieve questions about everything related to designing process'
         ]);
 
-         DB::table('interesting_fields')->insert([
-            'field_name' => 'Movies',
+         DB::table('topics')->insert([
+            'topic_name' => 'Movies',
           //  'image_name' => 'medical.jpg',
           //  'description'=> 'you will recieve questions about everything related to medical'
         ]);
 
-         DB::table('interesting_fields')->insert([
-            'field_name' => 'Fashion and Style',
+         DB::table('topics')->insert([
+            'topic_name' => 'Fashion and Style',
           //  'image_name' => 'accounting.jpg',
         //    'description'=> 'you will recieve questions about everything related to accounting'
         ]);
 
-         DB::table('interesting_fields')->insert([
-            'field_name' => 'General Knowledge',
+         DB::table('topics')->insert([
+            'topic_name' => 'General Knowledge',
           //  'image_name' => 'maths.jpg',
           //  'description'=> 'you will recieve questions about everything related to maths'
         ]);
 
-         DB::table('interesting_fields')->insert([
-            'field_name' => 'Law',
+         DB::table('topics')->insert([
+            'topic_name' => 'Law',
           //  'image_name' => 'e&t.jpg',
           //  'description'=> 'you will recieve questions about everything related to english & translating'
         ]);
 
-        DB::table('interesting_fields')->insert([
-           'field_name' => 'Psychology',
+        DB::table('topics')->insert([
+           'topic_name' => 'Psychology',
           // 'image_name' => 'e&t.jpg',
           // 'description'=> 'you will recieve questions about everything related to english & translating'
        ]);
 
-       DB::table('interesting_fields')->insert([
-          'field_name' => 'Physics',
+       DB::table('topics')->insert([
+          'topic_name' => 'Physics',
         //  'image_name' => 'e&t.jpg',
           //'description'=> 'you will recieve questions about everything related to english & translating'
       ]);
 
-      DB::table('interesting_fields')->insert([
-         'field_name' => 'Maths',
+      DB::table('topics')->insert([
+         'topic_name' => 'Maths',
         // 'image_name' => 'e&t.jpg',
         // 'description'=> 'you will recieve questions about everything related to english & translating'
       ]);
-      DB::table('interesting_fields')->insert([
-         'field_name' => 'Education',
+      DB::table('topics')->insert([
+         'topic_name' => 'Education',
       //   'image_name' => 'e&t.jpg',
         // 'description'=> 'you will recieve questions about everything related to english & translating'
       ]);
 
-      DB::table('interesting_fields')->insert([
-         'field_name' => 'Visiting and Travel',
+      DB::table('topics')->insert([
+         'topic_name' => 'Visiting and Travel',
          //'image_name' => 'e&t.jpg',
          //'description'=> 'you will recieve questions about everything related to english & translating'
      ]);
 
-     DB::table('interesting_fields')->insert([
-        'field_name' => 'Business',
+     DB::table('topics')->insert([
+        'topic_name' => 'Business',
       //  'image_name' => 'e&t.jpg',
         //'description'=> 'you will recieve questions about everything related to english & translating'
     ]);

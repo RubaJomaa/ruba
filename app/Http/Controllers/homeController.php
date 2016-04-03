@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Interesting_field;
+use App\Topic;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use DB;
@@ -28,7 +28,7 @@ class HomeController extends Controller
   public function index()
   {
 
-    $fields = DB::table('interesting_fields')->get();
+    $fields = DB::table('topics')->get();
     return view('home',compact(['fields']));
 
   }
