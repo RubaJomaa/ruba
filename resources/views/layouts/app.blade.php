@@ -9,14 +9,14 @@
     <script src="{{asset('/ckeditor/ckeditor.js')}}"></script>
     <script   src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
     
-     <script type="text/javascript">
+     <!--script type="text/javascript">
   $(document).ready(function(){
     $('#get').click(function(){
       var data = CKEDITOR.instances.editor1.getData();//this code gets the edited content, use it with you share the question
       $('#content').append(data);
     });
   });
-  </script>
+  </script-->
     
     
     <!-- Fonts -->

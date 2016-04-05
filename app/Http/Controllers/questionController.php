@@ -1,13 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
-//use Illuminate\Http\Request;
-use Input;
 use Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use Auth;
 class questionController extends Controller
 {
   public function __construct()
@@ -15,12 +12,27 @@ class questionController extends Controller
     $this->middleware('auth');
   }
 
-  public function postQuestion(){
+  public function postQuestion(Request $request)
+  {
 
-      if(Request::ajax()) {
-      $data = Input::all();
+    if(Request::ajax())
+    {
+      $data = Request::all();
       print_r($data);
+      $title=Request::get('title');
+      $question_body=Request::get('question_body');
+      $topic_id=Request::get('topic');
+
+      $question = new \App\Question;
+      $question->user_id = Auth::user()->id;
+      $question->title = $title;
+      $question->question_body = $question_body;
+      $question->topic_id = $topic_id;
+      $question->answered=0;
+      $question->answers_count=0;
+      $question->save();
       die;
+
     }
 
   }
