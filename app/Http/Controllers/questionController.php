@@ -5,6 +5,7 @@ use Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
+
 class questionController extends Controller
 {
   public function __construct()
@@ -22,7 +23,6 @@ class questionController extends Controller
       $title=Request::get('title');
       $question_body=Request::get('question_body');
       $topic_id=Request::get('topic');
-
       $question = new \App\Question;
       $question->user_id = Auth::user()->id;
       $question->title = $title;
@@ -32,12 +32,20 @@ class questionController extends Controller
       $question->answers_count=0;
       $question->save();
       die;
-
+      $user=Auth::user();
+      $topics= \App\User_Topic::where('user_id', $user->id)->first();
+      $questions = \App\Question::where('topic_id' , $topics->topic_id)->first();
+      return view('home', compact(['questions']));
     }
-
   }
 
-  public function getQuestion(){
+  public function getQuestion()
+  {
+    $user=Auth::user();
+    $topics= \App\User_Topic::where('user_id', $user->id)->first();
+    $questions = \App\Question::where('topic_id' , $topics->topic_id)->first();
+    return $topics;
+    return view('home', compact(['questions']));
 
   }
   public function editQuestion(){

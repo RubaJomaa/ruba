@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 <!-- consider putting this script in the public folder in some js folder -->
 <!--script type="text/javascript" src="{{asset('js/jquery-2.2.2.js')}}" > </script-->
 <script type="text/javascript">
@@ -12,9 +11,7 @@ $(document).ready(function(){
 
   // we select the form that will be submitted
   // and use the submit event to detect a submission
-  $('#get').click(function(){
 
-  });
   $('#ask_form')
   .submit(function(e){
     console.log("1");
@@ -30,6 +27,7 @@ $(document).ready(function(){
     var topic = $('select[name=topic]').val();
     var tagged_people = $('input[name=tagged_people]').val();
 
+
     //we assign an object to the data variable
     //this object consist of the data you want, like the title, token, body, user_id .. etc
     var data = {
@@ -37,7 +35,8 @@ $(document).ready(function(){
       title: title,
       question_body: data1,
       topic: topic,
-      tagged_people: tagged_people
+      tagged_people: tagged_people,
+
     };
     console.log("2",data);
     /*
@@ -88,17 +87,17 @@ $(document).ready(function(){
   <a href="{{URL('/profile/'.Auth::user()->name )}}"> {{Auth::user()->name}} </a><br>
 
   <div class="row">
-    <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-6 col-md-offset-4">
       <div class="panel panel-default">
-        <div class="panel-heading">Ask Here</div>
+        <div class="panel-heading">ASK form</div>
         <!-- we remove the action attribute from the form -->
         <!-- we give the form an id, and use it in the script above -->
         <form id="ask_form" class="form-horizontal" method="post">
           {!! csrf_field() !!}
 
-          <div class="col-md-4">
+          <div class="col-md-4"><br>
             <label>Title</label>
-            <input type="text" class="form-control" name="title" placeholder="title of your question" >
+            <input type="text" class="form-control" name="title" placeholder="title of your question" ><br>
             <label class="control-label" for="Topic">Topic</label>
             <select name="topic" class="form-control" id="select-2">
               @foreach($fields as $field)
@@ -107,30 +106,41 @@ $(document).ready(function(){
               <!-- shorten the solution, and pass the id ()$field->->id)-->
               <option value="{{$field->id}}">{{$field->topic_name}}</option>
               @endforeach
-            </select>
+            </select><br>
             <label>Tag People</label>
-            <input type="text" class="form-control"  name="tagged_people" placeholder="ex.person name" autocomplete="on">
-            <input type="file" class="form-control"  name="attached_file" >
+            <input type="text" class="form-control"  name="tagged_people" placeholder="ex.person name" autocomplete="on"><br>
+            <input type="file" class="form-control"   name="attached_file" >
           </div>
 
-          <label class="control_label" for="question_body">Question</label>
+          <!--label class="control_label" for="question_body">Question</label-->
           <!--CKEditor-->
           <div name="editor1" id="editor1" rows="10" cols="80" contenteditable="true"></div>
           <script>
           CKEDITOR.replace( 'editor1' );
-        </script>
-        <!--div class="content" name="question_body"></div-->
+          </script>
+          <!--div class="content" name="question_body"></div-->
 
-        <!--textarea rows="10" cols="80" name="question_body" placeholder="what's your question?"></textarea-->
+          <!--textarea rows="10" cols="80" name="question_body" placeholder="what's your question?"></textarea-->
 
-        <div class="col-md-4">
-          <button  name="singlebutton" class="btn btn-success" type="submit" >Ask</button>
+          <div class="col-md-4 col-md-offset-8">
+            <button  name="singlebutton" class="btn btn-success" type="submit" >Ask</button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+      <!هوون بعطي اروووور حتى وانا شايتهم ,, احذفهم ببطل يعطي ايرور -->
+      <!--
+          //   @if($questions)
+            <get questions form >
+            @foreach($questions as $question)
+            <div class="col-md-6 col-md-offset-6" contenteditable="false">
+              {{$question->title}}
+            </div>
+        //    @endforeach
+  //    @endif
+      -->
 
-</div>
-</div>
+    </div>
+  </div>
 </div>
 
 @endsection

@@ -39,7 +39,7 @@
        
          #cke_editor1
          {
-            width: 500px;
+            width: 545px;
            }
 
     </style>
