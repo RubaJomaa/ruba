@@ -18,7 +18,7 @@ class CreateAnswersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->longtext('answer');
             $table->integer('question_id')->unsigned();
-            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade'); // 
             $table->integer('likes_count')->default(0);//i've renamed the field, to likes_count, count as a name is not enough
             $table->timestamps();
         });
