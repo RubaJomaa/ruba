@@ -13,11 +13,18 @@ class questionController extends Controller
     $this->middleware('auth');
   }
 
+  public function getQuestions()
+  {
+
+  }
+
+
   public function postQuestion(Request $request)
   {
 
     if(Request::ajax())
     {
+    
       $data = Request::all();
       print_r($data);
       $title=Request::get('title');
@@ -32,22 +39,12 @@ class questionController extends Controller
       $question->answers_count=0;
       $question->save();
       die;
-      $user=Auth::user();
-      $topics= \App\User_Topic::where('user_id', $user->id)->first();
-      $questions = \App\Question::where('topic_id' , $topics->topic_id)->first();
-      return view('home', compact(['questions']));
+
+
     }
   }
 
-  public function getQuestion()
-  {
-    $user=Auth::user();
-    $topics= \App\User_Topic::where('user_id', $user->id)->first();
-    $questions = \App\Question::where('topic_id' , $topics->topic_id)->first();
-    return $topics;
-    return view('home', compact(['questions']));
 
-  }
   public function editQuestion(){
 
   }

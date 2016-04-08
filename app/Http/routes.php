@@ -36,7 +36,7 @@ Route::group(['middleware' => 'web'], function () {
 
   //for questions and answers
   Route::post('/postQuestion','questionController@postQuestion'); //if i ask a question it will call this function
-  Route::get('/postQuestion','questionController@getQuestion'); // to show questions
+  Route::get('/postQuestion','questionController@getQuestions'); // to show questions
   Route::patch('/question/{questionID}','questionController@editQuestion'); //if i post a question then i want to edit it
   Route::delete('/question/{questionID}','questionController@deleteQuestion'); // if i want to delete my question
   Route::get('/question/{questionID}/answers','questionController@getAnswers');// to show answers of specific question

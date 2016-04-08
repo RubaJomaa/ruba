@@ -8,4 +8,6 @@ class Topic extends Model
 {
     //
      protected $table = 'topics';
+    
+    
 }
