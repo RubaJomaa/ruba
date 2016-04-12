@@ -21,10 +21,8 @@ class questionController extends Controller
 
   public function postQuestion(Request $request)
   {
-
     if(Request::ajax())
     {
-    
       $data = Request::all();
       print_r($data);
       $title=Request::get('title');
@@ -39,8 +37,6 @@ class questionController extends Controller
       $question->answers_count=0;
       $question->save();
       die;
-
-
     }
   }
 

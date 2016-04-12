@@ -26,6 +26,10 @@
         <button type="button" name="button">
           <a href="{{url('/profile/'.$username.'/contact-info')}}">Contact</a>
         </button>
+          <br>
+          <button type="button" name="button">
+          <a href="{{url('/profile/'.$username.'/user_topics')}}">Topics</a>
+        </button>
       </div>
     </div>
   </div>

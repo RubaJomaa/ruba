@@ -36,7 +36,7 @@ Route::group(['middleware' => 'web'], function () {
 
   //for questions and answers
   Route::post('/postQuestion','questionController@postQuestion'); //if i ask a question it will call this function
-  Route::get('/postQuestion','questionController@getQuestions'); // to show questions
+  //Route::get('/postQuestion','questionController@getQuestions'); // to show questions
   Route::patch('/question/{questionID}','questionController@editQuestion'); //if i post a question then i want to edit it
   Route::delete('/question/{questionID}','questionController@deleteQuestion'); // if i want to delete my question
   Route::get('/question/{questionID}/answers','questionController@getAnswers');// to show answers of specific question
@@ -52,6 +52,10 @@ Route::group(['middleware' => 'web'], function () {
   Route::post('/profile/{username}/profile-info' ,'profileController@storeProfileInfo');
   Route::patch('/profile/{username}/profile-info' ,'profileController@updateProfileInfo');
 
+  //for user topics
+  Route::get('/profile/{username}/user_topics','profileController@getUserTopics');
+  Route::patch('/profile/{username}/user_topics' ,'profileController@updateUesrTopics');
+  
   //for CV in profile
   Route::get('/profile/{username}/portfolio','profileController@getPortfolio');
   Route::post('/profile/{username}/portfolio','profileController@storePortfolio');

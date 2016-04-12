@@ -33,6 +33,9 @@ $(document).ready(function(){
         console.log("error", data);
       }
     });
+      $('#like').click(function(e){
+          
+      });
     return false;
   });
 });
@@ -78,7 +81,14 @@ $(document).ready(function(){
 
      @if($questions)
      @foreach($questions as $question)
-     <div class="col-md-6"> {{$question->question_body}} </div>
+        
+     <div class="col-md-12"> <a href="{{URL('/profile/'.Auth::user()->name )}}">{{ $user_of_question }}</a>
+         <!--i need to display the user name for user who add the question , and the URL for his profile , instead of the thing that i have done  -->
+         <h1> {{ $question->title }} </h1>
+         <h4> {!! $question->question_body !!} </h4>
+         <a href=""
+        </div>
+        
     @endforeach
     @endif
     </div>
