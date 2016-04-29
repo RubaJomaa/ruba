@@ -23,4 +23,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function userTopics()
+    {
+      return $this->hasMany('App\User_topic')
+                  ->join('topics', 'topics.id', '=', 'users_topics.topic_id')
+                  ->select('topics.id', 'topics.topic_name');
+    }
+
 }

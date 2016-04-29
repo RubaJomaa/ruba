@@ -8,7 +8,13 @@
     <title>ASK WORLD</title>
     <script src="{{asset('/ckeditor/ckeditor.js')}}"></script>
     <script   src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
-    
+    @if(Auth::user())
+    <script type="text/javascript">
+      var username = '{{Auth::user()->name}}',
+      user_id = {{Auth::user()->id}}
+      ;
+    </script>
+    @endif
      <!--script type="text/javascript">
   $(document).ready(function(){
     $('#get').click(function(){
@@ -17,8 +23,8 @@
     });
   });
   </script-->
-    
-    
+
+
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
@@ -35,8 +41,8 @@
         .fa-btn {
             margin-right: 6px;
         }
-        
-       
+
+
          #cke_editor1
          {
             width: 545px;
@@ -95,7 +101,7 @@
     @yield('content')
     <!--if i delete those lines , log out will not work correctly -->
     <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>

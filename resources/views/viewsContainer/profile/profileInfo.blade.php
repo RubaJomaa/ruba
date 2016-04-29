@@ -14,7 +14,6 @@
         $(document).ready(function(){
           $('input').css({display: 'none'});
           $('#cancelEditButton').css({display: 'none'});
-
           $('#editButton').click(function(){
             $('input').css({display: 'inline-block'});
             $('.field').css({display: 'none'});
@@ -26,8 +25,6 @@
             $('.field').css({display: 'inline-block'});
             $('#cancelEditButton').css({display: 'none'});
           });
-
-
         })
         </script>
         @if($isMe)

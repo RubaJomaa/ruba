@@ -10,6 +10,7 @@
         {{$username}} <br>
         @if($infors)
         <script type="text/javascript">
+
         $(document).ready(function(){
           $('textarea').css({display: 'none'});
           $('input').css({display: 'none'});

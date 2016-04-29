@@ -25,6 +25,7 @@
 Route::group(['middleware' => 'web'], function () {
   Route::auth();
   Route::get('/home','HomeController@index');
+  Route::get('/home?stream={stream_type}', 'HomeController@getStreamOfType');
   Route::get('/','indexController@index');
   //setup
   Route::get('/setup/stepOne','setupController@getStepOne');
@@ -37,13 +38,15 @@ Route::group(['middleware' => 'web'], function () {
   //for questions and answers
   Route::post('/postQuestion','questionController@postQuestion'); //if i ask a question it will call this function
   //Route::get('/postQuestion','questionController@getQuestions'); // to show questions
+  Route::get('/question/{questionID}','questionController@getQuestion');
   Route::patch('/question/{questionID}','questionController@editQuestion'); //if i post a question then i want to edit it
   Route::delete('/question/{questionID}','questionController@deleteQuestion'); // if i want to delete my question
-  Route::get('/question/{questionID}/answers','questionController@getAnswers');// to show answers of specific question
-  Route::post('/question/{questionID}/answers','questionController@postAnswer');// to answer a specific question
-  Route::delete('/question/{questionID}/answers','questionController@deleteAnswer');// to delete answer
-  Route::patch('/question/{questionID}/answers','questionController@editAnswer');// to edit your answer
 
+  Route::post('/question/{questionID}/answers','AnswersController@postAnswer');// to answer a specific question
+  Route::delete('/question/{questionID}/answers/{answer_id}','AnswersController@deleteAnswer');// to delete answer
+  Route::patch('/question/{questionID}/answers/{answer_id}','AnswersController@editAnswer');// to edit your answer
+
+  Route::post('/checkInteractivityFactor', 'TopicsController@checkInteractivityFactor');
 
   //for profile
   Route::get('/profile/{username}' ,'profileController@getProfile');
@@ -54,8 +57,9 @@ Route::group(['middleware' => 'web'], function () {
 
   //for user topics
   Route::get('/profile/{username}/user_topics','profileController@getUserTopics');
-  Route::patch('/profile/{username}/user_topics' ,'profileController@updateUesrTopics');
-  
+  Route::post('/profile/{username}/user_topics/add', 'profileController@addUserTopic');
+  Route::delete('/profile/{username}/user_topics/delete', 'profileController@deleteUserTopic');
+
   //for CV in profile
   Route::get('/profile/{username}/portfolio','profileController@getPortfolio');
   Route::post('/profile/{username}/portfolio','profileController@storePortfolio');

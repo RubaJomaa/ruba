@@ -97,7 +97,7 @@ class profilecontroller extends Controller
 
   public function getProfile($username)
   {
-    $user = $this ->  checkUsername($username);
+    $user = $this ->checkUsername($username);
     if(!$user)
     return view('errors.404');
     else
@@ -288,6 +288,40 @@ class profilecontroller extends Controller
     $entry->user_attachment_name = $file->getClientOriginalName();
     $entry->title = $file->getFilename().'.'.$extension;
     $entry->save();
+    return back();
+  }
+
+  public function getUserTopics($username)
+  {
+    $user = $this -> checkUsername($username);
+    if(!$user)
+      return view('errors.404');
+    else
+    {
+      $isMe=false;
+      if($user->id == Auth::user()->id)
+        $isMe=true;
+      $x = $user->userTopics()->where('added', 1);
+      $user_topics = $x->get();
+      $user_topics_ids = $x->select('users_topics.topic_id')->get();
+      $new_topics = \App\Topic::whereNotIn('id', $user_topics_ids)->get();
+      return view('viewsContainer.profile.topics', compact(['username','user_topics','new_topics', 'isMe']));
+    }
+  }
+
+  public function addUserTopic(Request $request)
+  {
+    $user_topic = new \App\User_topic;
+    $user_topic->user_id = Auth::user()->id;
+    $user_topic->topic_id = $request->topic;
+    $user_topic->save();
+    return back();
+  }
+
+  public function deleteUserTopic(Request $request)
+  {
+    $user_topic = \App\User_topic::where('topic_id', $request->delete)->first();
+    $user_topic->delete();
     return back();
   }
 
