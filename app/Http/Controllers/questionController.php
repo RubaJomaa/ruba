@@ -13,12 +13,19 @@ class questionController extends Controller
     $this->middleware('auth');
   }
 
-  public function getQuestion($questionID)
+  public function getQuestion($questionID )
   {
+    
+    $isMe = false;
+    
     $question = \App\Question::Find($questionID);
+      
+      if(Auth::user()->id == $question->user_id){
+        $isMe=true;
+    }
     $question['user'] = $this->getUserById($question->user_id);
     $question['answers'] = $this->getAnswers($questionID);
-    return view('viewsContainer.questions.question', compact(['question']));
+    return view('viewsContainer.questions.question', compact(['question','isMe']));
   }
 
   public function postQuestion(Request $request)
@@ -61,6 +68,7 @@ class questionController extends Controller
 
   public function deleteQuestion(Request $request, $id)
   {
+    
     $question = \App\Question::find($id);
     $question->delete();
     return redirect('/home');

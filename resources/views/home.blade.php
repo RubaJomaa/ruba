@@ -81,13 +81,13 @@
             <input id="newQTitle" type="text" class="form-control" name="title" placeholder="title of your question" ><br>
             <label class="control-label" for="Topic">Topic</label>
             <select name="topic" class="form-control" id="select-2">
-              @foreach($user_topics as $field)
+              @foreach($topics as $field)
               <option value="{{$field->id}}">{{$field->topic_name}}</option>
               @endforeach
             </select><br>
             <label>Tag People</label>
             <input id="countries" class="form-control"  name="tagged_people" placeholder="ex.person name"><br>
-            <input type="file" class="form-control"   name="attached_file" >
+            
           </div>
 
           <!--CKEditor-->
@@ -112,10 +112,7 @@
           <option value="{{$topic->id}}">{{$topic->topic_name}}</option>
           @endforeach
         </select>
-        <br><br>
-        <button type="button" name="filterBtn">Filter</button>
-      </div>
-
+        </div>
       <div id="questionsList">
         You have no questions..
       </div>

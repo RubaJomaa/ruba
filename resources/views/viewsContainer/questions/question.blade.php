@@ -31,11 +31,13 @@
     <!-- <button class="question_bodySave" type="button" name="saveQuestionBody">save</button> -->
     <!-- <h5> {{ $question->tagged_people }} </h5> -->
   </form>
+    @if($isMe)
   <form action="/question/{{$question->id}}" method="post">
     {!! csrf_field() !!}
     <input type="hidden" name="_method" value="delete">
     <button type="submit" name="deleteQ">Delete</button>
   </form>
+    @endif
   <hr>
   <form id="answerForm" method="post">
     {!! csrf_field() !!}
