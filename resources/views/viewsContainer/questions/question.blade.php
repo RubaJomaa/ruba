@@ -1,5 +1,10 @@
 @extends('layouts.app')
 @section('content')
+<style>
+.b1{
+  background-color: #008CBA;
+}
+</style>
 <script type="text/javascript">
   var q_user_id = {{$question->user->id}};
 </script>
@@ -51,6 +56,12 @@
       <a href="{{URL('/profile/'.$question->user->name)}}">{{ $answer->user->name }}</a>
       <hr>
       {!! $answer->answer !!}
+      <form id="likeForm" method="post">
+        {!! csrf_field() !!}
+        <input type="hidden" name="id" value="$answer->id">
+        <button name="like" class="btn btn-success b1" type="submit"> Like </button>
+      </form>
+       <label for="likeForm"> {!! $answer->likes_count !!} like/s </label>
     </div>
     @endforeach
   </div>
@@ -67,4 +78,5 @@
 <script src="{{asset('js/AnswerController/answer-view-logic.js')}}" charset="utf-8"></script>
 <script src="{{asset('js/AnswerController/answer-post.js')}}" charset="utf-8"></script>
 <script src="{{asset('js/TopicsController/checkInteractivityFactor-post.js')}}" charset="utf-8"></script>
+<script src="{{asset('js/AnswerController/answer-like.js')}}" charset="utf-8"></script>
 @endsection

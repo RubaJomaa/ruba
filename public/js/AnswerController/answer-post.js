@@ -17,7 +17,7 @@ $(document).ready(function(){
   {
     e.preventDefault();
     var answer = CKEDITOR.instances.answerEditor.getData();
-    _token = $('#answerForm input[name=_token]').val(),
+    _token = $('#answerForm input[name=_token]').val();
     data = {
       _token: _token,
       answer: answer,

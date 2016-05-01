@@ -42,9 +42,10 @@ Route::group(['middleware' => 'web'], function () {
   Route::patch('/question/{questionID}','questionController@editQuestion'); //if i post a question then i want to edit it
   Route::delete('/question/{questionID}','questionController@deleteQuestion'); // if i want to delete my question
 
-  Route::post('/question/{questionID}/answers','AnswersController@postAnswer');// to answer a specific question
+  Route::post('/question/{questionID}/answers','AnswersController@postAnswer');//to answer a specific question
   Route::delete('/question/{questionID}/answers/{answer_id}','AnswersController@deleteAnswer');// to delete answer
   Route::patch('/question/{questionID}/answers/{answer_id}','AnswersController@editAnswer');// to edit your answer
+  Route::post('/question/{questionID}/answers/{answer-id}/like','likesController@postLike');// to like an answer
 
   Route::post('/checkInteractivityFactor', 'TopicsController@checkInteractivityFactor');
 
