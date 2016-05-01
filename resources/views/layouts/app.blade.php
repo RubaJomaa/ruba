@@ -7,7 +7,7 @@
 
     <title>ASK WORLD</title>
     <script src="{{asset('/ckeditor/ckeditor.js')}}"></script>
-    <script   src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
     @if(Auth::user())
     <script type="text/javascript">
       var username = '{{Auth::user()->name}}',
@@ -99,6 +99,9 @@
     </nav>
 
     @yield('content')
+    <link rel="stylesheet" href="{{asset('libs/kendo ui/styles/kendo.common-material.min.css')}}"/>
+    <link rel="stylesheet" href="{{asset('libs/kendo ui/styles/kendo.material.min.css')}}" />
+    <script src="{{asset('libs/kendo ui/js/kendo.core.min.js')}}"></script>
     <!--if i delete those lines , log out will not work correctly -->
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

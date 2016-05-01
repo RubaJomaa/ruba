@@ -9,7 +9,70 @@
     <div class="col-md-6 col-md-offset-4">
       <div class="panel panel-default">
         <div class="panel-heading">ASK form</div>
+        <!-- <script>
+                $(document).ready(function () {
+                    var data = [
+                            "Albania",
+                            "Andorra",
+                            "Armenia",
+                            "Austria",
+                            "Azerbaijan",
+                            "Belarus",
+                            "Belgium",
+                            "Bosnia & Herzegovina",
+                            "Bulgaria",
+                            "Croatia",
+                            "Cyprus",
+                            "Czech Republic",
+                            "Denmark",
+                            "Estonia",
+                            "Finland",
+                            "France",
+                            "Georgia",
+                            "Germany",
+                            "Greece",
+                            "Hungary",
+                            "Iceland",
+                            "Ireland",
+                            "Italy",
+                            "Kosovo",
+                            "Latvia",
+                            "Liechtenstein",
+                            "Lithuania",
+                            "Luxembourg",
+                            "Macedonia",
+                            "Malta",
+                            "Moldova",
+                            "Monaco",
+                            "Montenegro",
+                            "Netherlands",
+                            "Norway",
+                            "Poland",
+                            "Portugal",
+                            "Romania",
+                            "Russia",
+                            "San Marino",
+                            "Serbia",
+                            "Slovakia",
+                            "Slovenia",
+                            "Spain",
+                            "Sweden",
+                            "Switzerland",
+                            "Turkey",
+                            "Ukraine",
+                            "United Kingdom",
+                            "Vatican City"
+                        ];
 
+                    //create AutoComplete UI component
+                    $("#countries").kendoAutoComplete({
+                        dataSource: data,
+                        filter: "startswith",
+                        placeholder: "Select country...",
+                        separator: ", "
+                    });
+                });
+            </script> -->
         <form id="postQ" class="form-horizontal" method="post">
           {!! csrf_field() !!}
 
@@ -23,7 +86,7 @@
               @endforeach
             </select><br>
             <label>Tag People</label>
-            <input type="text" class="form-control"  name="tagged_people" placeholder="ex.person name" autocomplete="on"><br>
+            <input id="countries" class="form-control"  name="tagged_people" placeholder="ex.person name"><br>
             <input type="file" class="form-control"   name="attached_file" >
           </div>
 
@@ -40,11 +103,11 @@
         <select id="filter" name="filter">
           <option selected = "true" value="0">Your Topics Feed</option>
           <option value="1">All Site Feed</option>
-          <option value="2">You Questions</option>
+          <option value="2">Your Questions</option>
           <option value="3">Questions You've Interacted With</option><!-- likes ans answers -->
           <option value="4">Questions Of Topic..</option>
         </select>
-        <select id="topic_filter" name="topic_filter">
+        <select id="topic_filter" name="topic_id">
           @foreach($topics as $topic)
           <option value="{{$topic->id}}">{{$topic->topic_name}}</option>
           @endforeach
@@ -53,19 +116,10 @@
         <button type="button" name="filterBtn">Filter</button>
       </div>
 
-      @if($questions)
       <div id="questionsList">
-        @foreach($questions as $question)
-        <div class="col-md-12">
-          <hr>
-          <a href="{{URL('/profile/'.$question->user->name )}}">{{ $question->user->name }}</a>
-          <h1>
-            <a href="{{url('/question/'.$question->id)}}">{{ $question->title }}</a>
-          </h1>
-        </div>
-        @endforeach
+        You have no questions..
       </div>
-      @endif
+
     </div>
   </div>
 </div>

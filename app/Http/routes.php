@@ -25,7 +25,7 @@
 Route::group(['middleware' => 'web'], function () {
   Route::auth();
   Route::get('/home','HomeController@index');
-  Route::get('/home?stream={stream_type}', 'HomeController@getStreamOfType');
+  Route::get('/home/filter/{stream_type}/{topic_id}', 'HomeController@getStreamOfType');
   Route::get('/','indexController@index');
   //setup
   Route::get('/setup/stepOne','setupController@getStepOne');

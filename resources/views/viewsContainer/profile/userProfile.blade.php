@@ -6,7 +6,7 @@
   <div class="container-fluid">
     <div class="col-md-10 col-md-offset-1">
       <div class="panel panel-default">
-        Hello {{$username}}
+        Hello in {{$username}}'s profile 
         <br>
         <!-- this style, removes the ugly default style of the anchor -->
         <style media="screen">

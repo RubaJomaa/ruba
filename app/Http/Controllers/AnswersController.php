@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-
+use Request;
 use App\Http\Requests;
+use Auth;
 
 class AnswersController extends Controller
 {
