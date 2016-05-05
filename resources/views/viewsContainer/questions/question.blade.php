@@ -56,9 +56,10 @@
       <a href="{{URL('/profile/'.$question->user->name)}}">{{ $answer->user->name }}</a>
       <hr>
       {!! $answer->answer !!}
+        
       <form id="likeForm" method="post">
         {!! csrf_field() !!}
-        <input type="hidden" name="id" value="$answer->id">
+        <input type="hidden" name="id" value="{!! $answer->id !!}">
         <button name="like" class="btn btn-success b1" type="submit"> Like </button>
       </form>
        <label for="likeForm"> {!! $answer->likes_count !!} like/s </label>

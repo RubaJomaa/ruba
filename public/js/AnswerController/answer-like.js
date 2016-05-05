@@ -3,14 +3,17 @@
 like post controller with ajax
 */
 
-$(document).ready(function(){
+$(document).ready(function()
+{
   var answerId = $('input[name=id]').val();
-  init();
+console.log(answerId);
 
-  ///
+init();
+
   function init()
   {
-    $likeForm.submit(submitLike);
+
+      $('#likeForm').submit(submitLike);
   }
 
   function submitLike(e)
@@ -20,18 +23,18 @@ $(document).ready(function(){
     _token = $('#likeForm input[name=_token]').val();
 
     data = {
-      _token: _token
+      _token: _token ,
+      answerId : answerId ,
+      questionId : questionId
     };
-
+      console.log("hello");
     $.ajax({
-      url: '/question/' + questionId + '/answers/' + answerId + '/like',
-      type: 'POST' ,
+      url: '/question/' + questionId + '/answer/' + answerId,
+      type: 'POST',
       data: data
     });
+        console.log("hello");
 
     return false;
   }
-
-
-
 });
