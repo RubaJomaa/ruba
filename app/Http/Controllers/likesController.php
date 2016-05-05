@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use Request;
+use App\Http\Requests;
+use Response;
+use Auth;
 use App\Http\Controllers\Controller;
-
 
 class likesController extends Controller
 {
@@ -17,18 +16,22 @@ class likesController extends Controller
     if(Request::ajax())
     {
       $data = Request::all();
-
-      $answer_id = Request::get('answer_id');
-      return $answer_id;
+      $answer_id = Request::get('answerId');
       $like = new \App\Like;
       $like->user_id = Auth::user()->id;
       $like->answer_id = $answer_id;
       $answer = \App\Answer::find($answer_id);
-      $answer->likes_count = $answer->likes_count + 1 ;
+      $count = $answer->likes_count;
+      $answer->likes_count = $count + 1 ;
       $like-> save();
       $answer-> save();
-
-      die;
+      // die;
+      return response()->json([
+                  'status' => 200,
+                  'message' => 'success',
+                  'answer' => $answer//i return the whole updated answer
+                ]
+                );
     }
 
   }

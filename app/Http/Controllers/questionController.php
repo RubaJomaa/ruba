@@ -5,6 +5,7 @@ use Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
+use Response;
 
 class questionController extends Controller
 {
@@ -15,11 +16,11 @@ class questionController extends Controller
 
   public function getQuestion($questionID )
   {
-    
+
     $isMe = false;
-    
+
     $question = \App\Question::Find($questionID);
-      
+
       if(Auth::user()->id == $question->user_id){
         $isMe=true;
     }
@@ -68,7 +69,7 @@ class questionController extends Controller
 
   public function deleteQuestion(Request $request, $id)
   {
-    
+
     $question = \App\Question::find($id);
     $question->delete();
     return redirect('/home');
@@ -91,6 +92,26 @@ class questionController extends Controller
       $answers[$key]['user'] = $user;
     }
     return $answers;
+  }
+  public function postToLibrary(Request $request)
+  {
+    if(Request::ajax())
+    {
+      $data = Request::all();
+      $question_id = Request::get('questionId');
+      $library = new \App\Question_library;
+      $library->user_id = Auth::user()->id;
+      $library->question_id = $question_id;
+      $library->added = true;
+      $libray-> save();
+
+      return response()->json([
+                  'status' => 200,
+                  'message' => 'success',
+                  'library' => $library
+                ]
+                );
+    }
   }
 
 }

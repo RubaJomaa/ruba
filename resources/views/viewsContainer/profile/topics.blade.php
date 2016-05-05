@@ -18,7 +18,7 @@
         </form>
         @endif
 
-        @foreach ($user_topics as $field)
+        @foreach ($user_topics as $fields)
         <form action="/profile/{{Auth::user()->name}}/user_topics/delete" method="post">
           {!! csrf_field() !!}
           <input type="hidden" name="_method" value="delete">
@@ -30,9 +30,9 @@
                     <td>
                       <div class="checkbox">
                         @if($isMe)
-                        <button type="submit" name="delete" value="{{$field->id}}">X</button>
+                        <button type="submit" name="delete" value="{{$fields->id}}">X</button>
                         @endif
-                        {{ $field->topic_name }}
+                        {{ $fields->topic_name }}
                       </div>
                     </td>
                   </tr>

@@ -314,6 +314,7 @@ class profilecontroller extends Controller
     $user_topic = new \App\User_topic;
     $user_topic->user_id = Auth::user()->id;
     $user_topic->topic_id = $request->topic;
+    $user_topic->added = 1;
     $user_topic->save();
     return back();
   }

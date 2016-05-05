@@ -1,13 +1,21 @@
 @extends('layouts.app')
 @section('content')
 <style>
-.b1{
+.b1
+{
   background-color: #008CBA;
 }
 </style>
 <script type="text/javascript">
   var q_user_id = {{$question->user->id}};
 </script>
+
+<div class="col-md-4 col-offset-8">
+  <form class="addForm"  method="post">
+    <button type="submit" class="btn btn-success" name="add"> Add To My Library </button>
+  </form>
+</div>
+
 <div class="col-md-12">
   <a href="{{URL('/profile/'.$question->user->name )}}">{{$question->user->name}}</a><br>
 
@@ -17,6 +25,7 @@
     <input type="hidden" name="topic_id" value="{{$question->topic_id}}">
     <input type="hidden" name="user_id" value="{{$question->user->id}}">
   </form>
+
   <!--  -->
 
   <form id="PutQT" method="post">
@@ -27,7 +36,9 @@
     <!-- <input class="question_title" type="text" name="title" value="{{ $question->title }}"> -->
     <!-- <button class="question_titleSave" type="button" name="button">save</button> -->
   </form>
+
   <hr>
+
   <form id="PutQB" method="post">
     {!! csrf_field() !!}
     <input type="hidden" name="_method" value="patch">
@@ -56,13 +67,13 @@
       <a href="{{URL('/profile/'.$question->user->name)}}">{{ $answer->user->name }}</a>
       <hr>
       {!! $answer->answer !!}
-        
-      <form id="likeForm" method="post">
+      <form class="likeForm" id="likeForm{{$index}}" method="post">
         {!! csrf_field() !!}
-        <input type="hidden" name="id" value="{!! $answer->id !!}">
+        <input type="hidden" name="aid" value="{{ $answer->id }}">
+        <input type="hidden" name="index" value="{{ $index }}">
         <button name="like" class="btn btn-success b1" type="submit"> Like </button>
       </form>
-       <label for="likeForm"> {!! $answer->likes_count !!} like/s </label>
+      <label for="likeForm{{$index}}"> {!! $answer->likes_count !!} like/s </label>
     </div>
     @endforeach
   </div>
@@ -80,4 +91,5 @@
 <script src="{{asset('js/AnswerController/answer-post.js')}}" charset="utf-8"></script>
 <script src="{{asset('js/TopicsController/checkInteractivityFactor-post.js')}}" charset="utf-8"></script>
 <script src="{{asset('js/AnswerController/answer-like.js')}}" charset="utf-8"></script>
+<script src="{{asset('js/QuestionController/add-to-library.js')}}" charset="utf-8"></script>
 @endsection
