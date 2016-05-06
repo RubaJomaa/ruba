@@ -342,6 +342,23 @@ class profilecontroller extends Controller
     return $user;
   }
 
+  public function getLibrary($username){
+
+    $user = $this ->checkUsername($username);
+    $userId= $user->id;
+    if(!$user)
+    return view('errors.404');
+    else
+    {
+       $questions = \App\Question::join('questions_library' , 'questions.id',
+        '=','questions_library.question_id')->where('questions_library.user_id'
+         , $userId)->get();
+         
+       return view('viewsContainer.profile.library', compact(['username','questions']));
+    }
+  }
+
+
   /*
   public function download($user_attachment_name){
 

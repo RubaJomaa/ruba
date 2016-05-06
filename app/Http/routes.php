@@ -81,6 +81,10 @@ Route::group(['middleware' => 'web'], function () {
   Route::get('/profile/{username}/contact-info','profileController@getContact');
   Route::post('/profile/{username}/contact-info','profileController@storeContact');
   Route::patch('/profile/{username}/contact-info','profileController@updateContact');
+    
+
+    
+  Route::get('/profile/{username}/library','profileController@getLibrary'); // to get the library page 
 
 
   //for user's questions Library
