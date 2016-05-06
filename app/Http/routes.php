@@ -44,7 +44,7 @@ Route::group(['middleware' => 'web'], function () {
 
   Route::post('/question/{questionID}/answers','AnswersController@postAnswer');//to answer a specific question
 
-  Route::post('/question/{questionID}/addToLibrary','questionController@postToLibrary'); //to add question to a library
+  Route::post('/question/{questionID}/library','questionController@postToLibrary'); //to add question to a library
 
  // Route::delete('/question/{questionID}/answers/{answer_id}','AnswersController@deleteAnswer');// to delete answer
  // Route::patch('/question/{questionID}/answers/{answer_id}','AnswersController@editAnswer');// to edit your answer

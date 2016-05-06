@@ -21,17 +21,18 @@ init();
       _token = $(this._token).val(),
 
       data = {
-        _token: _token 
+        _token: _token ,
+        questionId: questionId
       };
 
 
     $.ajax({
 
-      url: '/question/' + questionId + '/addToLibrary' ,
+      url: '/question/' + questionId + '/library' ,
       type: 'POST',
       data: data,
       success: function(response){
-      console.log(success);
+      console.log('success');
       },
       error: function(error){
         console.log(error);

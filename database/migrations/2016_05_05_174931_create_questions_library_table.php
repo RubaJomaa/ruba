@@ -16,7 +16,7 @@ class CreateQuestionsLibraryTable extends Migration
             $table->increments('id');
             $table->integer('question_id')->unsigned()->unique();
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
-            $table->integer('user_id')->unsigned()->unique();
+            $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->boolean('added')->default(false);
             $table->timestamps();

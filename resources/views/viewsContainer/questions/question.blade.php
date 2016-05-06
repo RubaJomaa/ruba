@@ -12,6 +12,7 @@
 
 <div class="col-md-4 col-offset-8">
   <form class="addForm"  method="post">
+       {!! csrf_field() !!}
     <button type="submit" class="btn btn-success" name="add"> Add To My Library </button>
   </form>
 </div>

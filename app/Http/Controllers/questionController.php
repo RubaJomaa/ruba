@@ -93,17 +93,16 @@ class questionController extends Controller
     }
     return $answers;
   }
-  public function postToLibrary(Request $request)
+  public function postToLibrary(Request $request, $questionId)
   {
     if(Request::ajax())
     {
       $data = Request::all();
-      $question_id = Request::get('questionId');
-      $library = new \App\Question_library;
+      $library = new \App\Question_Library;
       $library->user_id = Auth::user()->id;
-      $library->question_id = $question_id;
+      $library->question_id = $questionId;
       $library->added = true;
-      $libray-> save();
+      $library-> save();
 
       return response()->json([
                   'status' => 200,
