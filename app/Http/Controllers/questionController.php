@@ -18,16 +18,16 @@ class questionController extends Controller
   {
 
     $isMe = false;
-
     $question = \App\Question::Find($questionID);
-
-      if(Auth::user()->id == $question->user_id){
+      if( Auth::user()->id == $question->user_id){
         $isMe=true;
     }
+      
     $question['user'] = $this->getUserById($question->user_id);
     $question['answers'] = $this->getAnswers($questionID);
     return view('viewsContainer.questions.question', compact(['question','isMe']));
   }
+    
 
   public function postQuestion(Request $request)
   {

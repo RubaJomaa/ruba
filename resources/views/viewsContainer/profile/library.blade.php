@@ -18,7 +18,7 @@
         @foreach($questions as $question)
         <div class="container" style="opacity:0.9">
               <br>
-              <a href="{{url('/question/5'.$question->id)}}">{{$question->title}}
+              <a href="{{url('/question/'.$question->id)}}">{{$question->title}}
         </div>
        @endforeach
        @endif

@@ -352,8 +352,7 @@ class profilecontroller extends Controller
     {
        $questions = \App\Question::join('questions_library' , 'questions.id',
         '=','questions_library.question_id')->where('questions_library.user_id'
-         , $userId)->get();
-         
+         , $userId)->select('questions.id','title')->get();
        return view('viewsContainer.profile.library', compact(['username','questions']));
     }
   }
