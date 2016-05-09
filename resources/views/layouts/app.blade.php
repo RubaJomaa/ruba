@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>ASK WORLD</title>
+    <link rel="stylesheet" href="{{asset('css/home.css')}}" media="screen" title="no title" charset="utf-8">
     <script src="{{asset('/ckeditor/ckeditor.js')}}"></script>
     <script src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
     @if(Auth::user())
@@ -73,6 +74,10 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
+                    @if(Auth::user())
+                    <li><a href="{{ url('/groups') }}">Group Disscussions</a></li>
+                    <li><a href="{{ url('/articles') }}">Articles</a></li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->

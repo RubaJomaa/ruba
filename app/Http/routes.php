@@ -50,10 +50,14 @@ Route::group(['middleware' => 'web'], function () {
  // Route::patch('/question/{questionID}/answers/{answer_id}','AnswersController@editAnswer');// to edit your answer
   Route::post('/question/{questionID}/answer/{answerID}/like','likesController@postLike');// to like an answer
 
+  Route::post('/users/namesstartwith/{string}', 'UsersController@getUsersOfNamesStartingWith');
 
-  Route::get('/groups/new', function(){
-    return "creating new group";
-  });
+  Route::get('/groups', 'GroupsController@index');
+  Route::get('/group/{group_id}', 'GroupsController@getGroup');
+  Route::get('/groups/new/{question_id}/wizard', 'GroupsController@getGroupWizard');
+  Route::post('/groups/new/{question_id}/wizard', 'GroupsController@createGroup');
+  Route::post('/group/{group_id}/library', 'GroupsController@toggleOpinionLibrary');
+  Route::get('/articles', 'ArticlesController@index');
 
   Route::post('/checkInteractivityFactor', 'TopicsController@checkInteractivityFactor');
 
@@ -81,10 +85,10 @@ Route::group(['middleware' => 'web'], function () {
   Route::get('/profile/{username}/contact-info','profileController@getContact');
   Route::post('/profile/{username}/contact-info','profileController@storeContact');
   Route::patch('/profile/{username}/contact-info','profileController@updateContact');
-    
 
-    
-  Route::get('/profile/{username}/library','profileController@getLibrary'); // to get the library page 
+
+
+  Route::get('/profile/{username}/library','profileController@getLibrary'); // to get the library page
 
 
   //for user's questions Library

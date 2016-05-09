@@ -84,9 +84,7 @@
         <option value="{{$field->id}}">{{$field->topic_name}}</option>
         @endforeach
       </select><br>
-      <label>Tag People</label>
-      <input id="countries" class="form-control"  name="tagged_people" placeholder="ex.person name"><br>
-
+      
     </div>
 
     <!--CKEditor-->

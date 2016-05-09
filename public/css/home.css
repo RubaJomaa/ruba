@@ -5,3 +5,142 @@
   width: 100%;
   height: 50px;
 }
+
+button a
+{
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+.no-anchor-style
+{
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+.pointer-cursor
+{
+  cursor: pointer;
+}
+
+.ac
+{
+  margin: 10px;
+}
+
+.ac-members
+{
+
+}
+
+.ac-member
+{
+  display: inline-block;
+  height: 30px;
+  vertical-align: middle !important;
+  background-color: #35cf7c;
+  color: white;
+  padding: 4px;
+  margin: 2px;
+  border: 2px solid #479e55;
+  border-radius: 10%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.ac-input
+{
+  width: 200px;
+  border: 1px solid #479e55;
+  border-radius: 10%;
+}
+
+.ac-output
+{
+  position: relative;
+  width: 200px;
+  border: 1px solid #6da48a;
+  /*border-radius: 10%;*/
+}
+
+.ac-output tr
+{
+  width: 200px;
+  text-align: center;
+  border-bottom: 1px solid #6da48a;
+  cursor: pointer;
+}
+
+.ac-output td
+{
+  width: 200px;
+}
+
+.group-header
+{
+  text-align: center;
+}
+
+.group-settings-gear
+{
+  float: right;
+  padding-right: 50px;
+}
+
+.group-members
+{
+  padding: 20px;
+}
+
+.group-stream
+{
+
+}
+
+.group-issue-preview
+{
+  border: 2px solid rgb(85, 207, 137);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.group-opinions
+{
+
+}
+
+.group-opinion
+{
+  padding: 20px;
+  border-bottom: 1px solid rgb(85, 207, 137);
+}
+
+.group-library-opinion
+{
+  padding: 10px;
+  border-bottom: 1px solid rgb(85, 207, 137);
+}
+
+.group-opinion-check
+{
+  float: right;
+}
+
+.group-library-opinion-check
+{
+
+}
+
+.group-library
+{
+  padding: 20px;
+}
+
+.group-library hr
+{
+  border-top: 1px solid #353953;
+}

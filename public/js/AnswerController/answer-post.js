@@ -10,14 +10,14 @@ $(document).ready(function(){
   ///
   function init()
   {
-    $answerForm.submit(submitAnswer);
+    $('#answerForm').submit(submitAnswer);
   }
 
   function submitAnswer(e)
   {
     e.preventDefault();
-    var answer = CKEDITOR.instances.answerEditor.getData();
-    _token = $('#answerForm input[name=_token]').val();
+    var answer = CKEDITOR.instances.answerEditor.getData(),
+    _token = $('#answerForm input[name=_token]').val(),
     data = {
       _token: _token,
       answer: answer,
@@ -42,8 +42,8 @@ $(document).ready(function(){
     '<hr>' +
     data.answer +
     '</div>';
-    $('#answersList').prepend(newAnswer);//adds the answer to the view and renders it, this makes
-    CKEDITOR.instances.answerEditor.setData('');//clears the editor
+    $('#answersList').prepend(newAnswer); //adds the answer to the view and renders it
+    CKEDITOR.instances.answerEditor.setData(''); //clears the editor
   }
 
   function postAnswerError(data)
