@@ -14,7 +14,7 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('group_id')->unsigned();
+            $table->integer('group_id')->unsigned()->unique();
             $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
             $table->integer('topic_id')->unsigned();
             $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');

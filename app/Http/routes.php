@@ -58,6 +58,10 @@ Route::group(['middleware' => 'web'], function () {
   Route::post('/groups/new/{question_id}/wizard', 'GroupsController@createGroup');
   Route::post('/group/{group_id}/library', 'GroupsController@toggleOpinionLibrary');
   Route::get('/articles', 'ArticlesController@index');
+  Route::get('/group/{group_id}/article', 'ArticlesController@getArticleComposition');
+  Route::get('/article/{article_id}/json', 'ArticlesController@getArticleJSON');
+  Route::post('/article/{article_id}', 'ArticlesController@updateArticle');
+  Route::post('/article/{article_id}/publish', 'ArticlesController@publishArticle');
 
   Route::post('/checkInteractivityFactor', 'TopicsController@checkInteractivityFactor');
 

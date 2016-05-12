@@ -9,11 +9,16 @@
   <h1>
     {{$question->title}}
   </h1>
-  <div class="group-settings-gear">
-    <a href="" class="no-anchor-style">
+  <div class="group-settings-gear dropdown">
+    <a href="" class="no-anchor-style" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
       Settings
       <span class="glyphicon glyphicon-cog"></span>
     </a>
+    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+      <li><a href="{{url('/group/'.$group->id.'/article')}}">Edit The Article</a></li>
+      <li role="separator" class="divider"></li>
+      <li><a href="">Do Sth Else</a></li>
+    </ul>
   </div>
 </div>
 <div class="container">
@@ -42,7 +47,6 @@
       @foreach($answers as $index=>$answer)
       <div class="group-opinion">
         <div class="group-opinion-body">
-         
           {!! $answer->answer !!}
         </div>
         <hr>

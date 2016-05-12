@@ -23,11 +23,11 @@ class GroupsController extends Controller
 
   public function getGroup($group_id)
   {
-   
+
     $group = \App\Group::find($group_id);
-    
+
     $question = $group->question()->first();
-       
+
     $members = \App\Member::join('users', 'members.user_id', '=', 'users.id')
                             ->where('group_id', $group_id)
                             ->select('users.id', 'members.id as member_id', 'name', 'is_admin')
@@ -36,7 +36,7 @@ class GroupsController extends Controller
                           ->join('users', 'answers.user_id', '=', 'users.id')
                           ->select('answers.id', 'answer', 'users.id as user_id', 'name')
                           ->get();
-    
+
     $library_answers =
       \App\Answer::join('library', 'answers.id', '=', 'library.answer_id')
       ->join('users', 'answers.user_id', '=', 'users.id')
@@ -44,7 +44,7 @@ class GroupsController extends Controller
       ->select('answers.id', 'library.id as library_id',
                 'answer', 'answers.user_id', 'users.name')
       ->get();
-      
+
     foreach ($answers as $i => $answer)
     {
       if (\App\Library::where('answer_id', $answer->id)->exists())
@@ -68,34 +68,25 @@ class GroupsController extends Controller
   public function createGroup(Request $request, $question_id)
   {
     $question = \App\Question::find($question_id);
+
     $group = new \App\Group;
     $group->question_id = $question_id;
     $group->save();
-    $members = [];
-    $data = Request::all();
+
+    $article = new \App\Article;
+    $article->title = $question->title;
+    $article->topic_id = $question->topic_id;
+    $article->body = $question->question_body;
+    $article->group_id = $group->id;
+    $article->save();
+
     $member = new \App\Member;
     $member->user_id = Auth::user()->id;
     $member->group_id = $group->id;
     $member->is_admin = 1;
     $member->save();
-      $answers=[];
-      $library_answers=[];
 
-    foreach ($data as $key => $value)
-    {
-      if($key == '_token' || $key == 'createGroup')
-        continue;
-      $val = intval($value);
-      $user = \App\User::find($val);
-      array_push($members, $user);
-      $member = new \App\Member;
-      $member->user_id = $val;
-      $member->group_id = $group->id;
-      $member->is_admin = 0;
-      $member->save();
-    }
-
-    return view('viewsContainer.groups.group', compact(['question', 'group', 'members','answers','library_answers']));
+    return redirect()->action('GroupsController@getGroup', ['group_id' => $group->id]);
   }
 
   public function toggleOpinionLibrary(Request $request, $group_id)
