@@ -19,6 +19,27 @@ class profilecontroller extends Controller
     $this->middleware('auth');
   }
 
+  public function getProfile($username)
+  {
+    $user = $this ->checkUsername($username);
+    if(!$user)
+      return view('errors.404');
+    else
+    {
+      $questions_count = \App\Question::where('user_id', $user->id)->count();
+      $answers_count = \App\Answer::where('user_id', $user->id)->count();
+      $likes_count = \App\Like::where('user_id', $user->id)->count();
+      $questions = \App\Question::where('user_id', $user->id)->get();
+      $questions_answered_to =
+        \App\Question::join('answers', 'questions.id', '=', 'answers.question_id')
+                      ->where('answers.user_id', $user->id)
+                      ->select('questions.id', 'questions.title')
+                      ->distinct()
+                      ->get();
+      return view('viewsContainer.profile.userProfile', compact(['username', 'questions', 'questions_answered_to', 'questions_count', 'answers_count', 'likes_count']));
+    }
+  }
+
   public function getPortfolio($username)
   {
     $entries = User_attachment::all();
@@ -95,14 +116,6 @@ class profilecontroller extends Controller
     }
   }
 
-  public function getProfile($username)
-  {
-    $user = $this ->checkUsername($username);
-    if(!$user)
-    return view('errors.404');
-    else
-    return view('viewsContainer.profile.userProfile', compact(['username']));
-  }
 
   public function getProfileInfo($username)
   {

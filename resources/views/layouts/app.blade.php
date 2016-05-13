@@ -16,15 +16,6 @@
       ;
     </script>
     @endif
-     <!--script type="text/javascript">
-  $(document).ready(function(){
-    $('#get').click(function(){
-      var data = CKEDITOR.instances.editor1.getData();//this code gets the edited content, use it with you share the question
-      $('#content').append(data);
-    });
-  });
-  </script-->
-
 
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
@@ -77,6 +68,7 @@
                     @if(Auth::user())
                     <li><a href="{{ url('/groups') }}">Group Disscussions</a></li>
                     <li><a href="{{ url('/articles') }}">Articles</a></li>
+                    <li><a href="{{ url('/users') }}">Discover Members</a></li>
                     @endif
                 </ul>
 
@@ -94,6 +86,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/profile/'.Auth::user()->name) }}"><i class="fa fa-btn fa-user"></i>Profile</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>

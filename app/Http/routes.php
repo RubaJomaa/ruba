@@ -50,6 +50,8 @@ Route::group(['middleware' => 'web'], function () {
  // Route::patch('/question/{questionID}/answers/{answer_id}','AnswersController@editAnswer');// to edit your answer
   Route::post('/question/{questionID}/answer/{answerID}/like','likesController@postLike');// to like an answer
 
+// users
+  Route::get('/users', 'UsersController@index');
   Route::post('/users/namesstartwith/{string}', 'UsersController@getUsersOfNamesStartingWith');
 
   Route::get('/groups', 'GroupsController@index');
@@ -62,8 +64,6 @@ Route::group(['middleware' => 'web'], function () {
   Route::get('/article/{article_id}/json', 'ArticlesController@getArticleJSON');
   Route::post('/article/{article_id}', 'ArticlesController@updateArticle');
   Route::post('/article/{article_id}/publish', 'ArticlesController@publishArticle');
-
-  Route::post('/checkInteractivityFactor', 'TopicsController@checkInteractivityFactor');
 
   //for profile
   Route::get('/profile/{username}' ,'profileController@getProfile');
@@ -90,17 +90,13 @@ Route::group(['middleware' => 'web'], function () {
   Route::post('/profile/{username}/contact-info','profileController@storeContact');
   Route::patch('/profile/{username}/contact-info','profileController@updateContact');
 
-
-
   Route::get('/profile/{username}/library','profileController@getLibrary'); // to get the library page
 
-
-  //for user's questions Library
-  //Route::get('/myLibrary/{$username}','homeController@getLibrary');
-  //Route::post('/myLibrary/{$username}','homeController@postLibrary');
-
-  //for calender
-  //  Route::get('/calender','homeController@getCalender');
-  //  Route::post('/calender','homeController@postCalender'); //for to do list
+// topics
+  Route::get('/topics', 'TopicsController@getTopics');
+  Route::post('/topics', 'TopicsController@addTopic');
+  Route::delete('/topics', 'TopicsController@deleteTopic');
+  Route::patch('/topics', 'TopicsController@updateTopic');
+  Route::post('/checkInteractivityFactor', 'TopicsController@checkInteractivityFactor');
 
 });

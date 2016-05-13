@@ -6,6 +6,28 @@
   height: 50px;
 }
 
+.stats
+{
+  height: 50px;
+}
+
+.stat-item
+{
+  width: 50px;
+  display:inline-block;
+  text-align: center;
+}
+
+.stat-left, .stat-mid
+{
+  border-right: 1px solid #bdb9cf;
+}
+
+.stat-right
+{
+  /*border-left: 1px solid #bdb9cf;*/
+}
+
 button a
 {
   color: inherit !important;
