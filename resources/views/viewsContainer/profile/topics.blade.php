@@ -17,7 +17,7 @@
           <button type="submit" name="addUserTopic">Add Topic</button>
         </form>
         @endif
-
+        @if(count($user_topics))
         @foreach ($user_topics as $fields)
         <form action="/profile/{{Auth::user()->name}}/user_topics/delete" method="post">
           {!! csrf_field() !!}
@@ -41,7 +41,11 @@
             </div>
           </form>
           @endforeach
+          @else
+           No topics for this user .
+          @endif
         </div>
+        <a href="/profile/{{$username}}" > Back </a>
       </div>
     </div>
   </div>

@@ -18,7 +18,7 @@ class CreateMembersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('group_id')->unsigned();
             $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
-            $table->boolean('is_admin');
+            $table->boolean('is_group_admin');
             $table->timestamps();
         });
     }

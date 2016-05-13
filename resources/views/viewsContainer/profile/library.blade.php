@@ -14,15 +14,19 @@
           text-decoration: none !important;
         }
         </style>
-        @if($questions)
+        @if(count($questions))
         @foreach($questions as $question)
         <div class="container" style="opacity:0.9">
               <br>
               <a href="{{url('/question/'.$question->id)}}">{{$question->title}}
-        </div>
+
+          </div>
        @endforeach
+       @else
+        No questions added to this user library yet.
        @endif
       </div>
+      <a href="/profile/{{$username}}" > Back </a>
     </div>
   </div>
 </div>

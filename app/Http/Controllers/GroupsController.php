@@ -30,7 +30,7 @@ class GroupsController extends Controller
 
     $members = \App\Member::join('users', 'members.user_id', '=', 'users.id')
                             ->where('group_id', $group_id)
-                            ->select('users.id', 'members.id as member_id', 'name', 'is_admin')
+                            ->select('users.id', 'members.id as member_id', 'name', 'is_group_admin')
                             ->get();
     $answers = \App\Answer::where('question_id', $question->id)
                           ->join('users', 'answers.user_id', '=', 'users.id')
@@ -83,7 +83,7 @@ class GroupsController extends Controller
     $member = new \App\Member;
     $member->user_id = Auth::user()->id;
     $member->group_id = $group->id;
-    $member->is_admin = 1;
+    $member->is_group_admin = 1;
     $member->save();
 
     return redirect()->action('GroupsController@getGroup', ['group_id' => $group->id]);

@@ -6,8 +6,21 @@
   background-color: #008CBA;
 }
 </style>
+
 <script type="text/javascript">
-  var q_user_id = {{$question->user->id}};
+var q_user_id = {{$question->user->id}};
+
+$(document).ready(function(){
+  $('#like').css({display: 'inline-block'});
+
+
+  $('#like').click(function(){
+
+    $('#like').css({display: 'none'});
+  });
+
+
+})
 </script>
 
 <div class="col-md-2">
@@ -52,13 +65,13 @@
     <!-- <button class="question_bodySave" type="button" name="saveQuestionBody">save</button> -->
     <!-- <h5> {{ $question->tagged_people }} </h5> -->
   </form>
-    @if($isMe)
+  @if($isMe)
   <form action="/question/{{$question->id}}" method="post">
     {!! csrf_field() !!}
     <input type="hidden" name="_method" value="delete">
     <button type="submit" name="deleteQ">Delete</button>
   </form>
-    @endif
+  @endif
   <hr>
   <form id="answerForm" method="post">
     {!! csrf_field() !!}
@@ -76,7 +89,8 @@
         {!! csrf_field() !!}
         <input type="hidden" name="aid" value="{{ $answer->id }}">
         <input type="hidden" name="index" value="{{ $index }}">
-        <button name="like" class="btn btn-success b1" type="submit"> Like </button>
+        <button name="like"  class="btn btn-success b1" id="like" type="submit"> Like </button>
+
       </form>
       <label for="likeForm{{$index}}"> {!! $answer->likes_count !!} like/s </label>
     </div>
@@ -86,7 +100,7 @@
 <!-- scripts -->
 <!-- these scripts must be in order,  and must be below the content in order for the content to be loaded-->
 <script type="text/javascript">
-  var questionId = {{$question->id}};
+var questionId = {{$question->id}};
 </script>
 <script src="{{asset('js/QuestionController/question-common-vars.js')}}" charset="utf-8"></script>
 <script src="{{asset('js/QuestionController/question-view-logic.js')}}" charset="utf-8"></script>

@@ -237,7 +237,6 @@ class profilecontroller extends Controller
       $contact->save();
       return back();
     }
-
   }
 
   public function updateContact(Request $request, $username)
