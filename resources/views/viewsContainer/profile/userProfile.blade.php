@@ -65,7 +65,8 @@
           <h3>My Questions</h3>
           @foreach($questions as $key => $question)
           <div class="row">
-            {!! $question->title !!}
+              <a  href="{{URL('/question/'.$question->id )}}"> {!! $question->title !!}</a>
+           
             <hr>
           </div>
           @endforeach
@@ -74,7 +75,8 @@
           <h3>Questions I Answered</h3>
           @foreach($questions_answered_to as $key => $question)
           <div class="row">
-            {!! $question->title !!}
+             <a  href="{{URL('/question/'.$question->id )}}"> {!! $question->title !!}</a>
+           
             <hr>
           </div>
           @endforeach

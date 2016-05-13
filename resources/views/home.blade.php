@@ -2,9 +2,6 @@
 @section('content')
 
 <div class="container">
-  <!-- this anchor is to redirect to the profile -->
-  <a href="{{URL('/profile/'.Auth::user()->name )}}"> {{Auth::user()->name}} </a><br>
-
   <div class="row">
     <div class="col-md-12">
       <!-- the following div is shown only to the admin, put it wherever you see suitable-->
