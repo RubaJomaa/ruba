@@ -1,91 +1,99 @@
-@extends('layouts.app')
+@extends('layouts.profile-master')
 
-@section('content')
-
+@section('profile-content')
 <div class="container" style="opacity:0.9">
   <div class="container-fluid">
-    <div class="col-md-10 col-md-offset-1">
-      <div class="panel panel-default">
-        <div class="panel-heading">Dashboard</div>
-        {{$username}} <br>
-        @if($infors)
-        <script type="text/javascript">
+    <div class="well profile-inner-container col-md-10">
+      @if($infors)
+      <script type="text/javascript">
+      $(document).ready(function(){
+        $('textarea').css({display: 'none'});
+        $('input').css({display: 'none'});
+        $('#cancelEditButton').css({display: 'none'});
+        $('button[name=update]').css({display: 'none'});
 
-        $(document).ready(function(){
+        $('#editButton').click(function(){
+          $('textarea').css({display: 'inline-block'});
+          $('input').css({display: 'inline-block'});
+          $('.field').css({display: 'none'});
+          $('#cancelEditButton').css({display:'inline-block'});
+          $('button[name=update]').css({display: 'inline-block'});
+          $(this).css({display:'none'});
+        });
+
+        $('#cancelEditButton').click(function(){
           $('textarea').css({display: 'none'});
           $('input').css({display: 'none'});
+          $('.field').css({display: 'inline-block'});
           $('#cancelEditButton').css({display: 'none'});
-
-          $('#editButton').click(function(){
-            $('textarea').css({display: 'inline-block'});
-            $('input').css({display: 'inline-block'});
-            $('.field').css({display: 'none'});
-            $('#cancelEditButton').css({display:'inline-block'});
-          });
-
-          $('#cancelEditButton').click(function(){
-            $('textarea').css({display: 'none'});
-            $('input').css({display: 'none'});
-            $('.field').css({display: 'inline-block'});
-            $('#cancelEditButton').css({display: 'none'});
-          });
-        })
-        </script>
+          $('button[name=update]').css({display: 'none'});
+          $('#editButton').css({display: 'inline-block'});
+        });
+      })
+      </script>
+      <form method="post" action="/profile/{{$username}}/portfolio">
+        {!! csrf_field() !!}
+        <input type="hidden" name="_method" value="PATCH">
+          
+            <table>
+                <tr><td class="f-label">Overview </td><td class="f-input"><textarea rows="3" cols="30" name="overview" > {{$infors->overview}}</textarea> <span class="field"> {{$infors->overview}} </span> <br></td></tr>
+                <tr><td class="f-label">Skills </td><td class="f-input"><textarea rows="3" cols="30" name="skills">{{$infors->skills}}</textarea> <span class="field"> {{$infors->skills}} </span>  <br></td></tr>
+                <tr><td class="f-label">Achievments </td><td class="f-input"> <textarea rows="3" cols="30" name="achievements" > {{$infors->achievements}}</textarea> <span class="field"> {{$infors->achievements}} </span><br></td></tr>
+                <tr><td class="f-label">Work History </td><td class="f-input"> <textarea rows="3" cols="30" name="work_history"> {{$infors->work_history}}</textarea> <span class="field"> {{$infors->work_history}} </span><br></td></tr>
+                <tr><td class="f-label">Education </td><td class="f-input"> <textarea rows="3" cols="30" name="education">{{$infors->education}}</textarea> <span class="field"> {{$infors->education}} </span><br></td></tr>
+                <tr><td class="f-label">Languages </td><td class="f-input"><textarea rows="2" cols="30" name="languages"> {{$infors->languages}}</textarea><span class="field"> {{$infors->languages}} </span><br><br></td></tr>
+          </table>
         @if($isMe)
-        <button id="editButton" type="button" name="button">edit</button>
-        <button id="cancelEditButton" type="button" name="button">cancel</button>
+        <button class="btn btn-default" type="submit" name="update">Update</button>
+        <button class="btn btn-default" id="editButton" type="button" name="button">Edit</button>
+        <button class="btn btn-default" id="cancelEditButton" type="button" name="button">Cancel</button>
         @endif
-        <form method="post" action="/profile/{{$username}}/portfolio">
-          {!! csrf_field() !!}
-          <input type="hidden" name="_method" value="PATCH">
-          Overview : <textarea rows="3" cols="30" name="overview" > {{$infors->overview}}</textarea> <span class="field"> {{$infors->overview}} </span> <br>
-          Skills : <textarea rows="3" cols="30" name="skills">{{$infors->skills}}</textarea> <span class="field"> {{$infors->skills}} </span>  <br>
-          Achievements: <textarea rows="3" cols="30" name="achievements" > {{$infors->achievements}}</textarea> <span class="field"> {{$infors->achievements}} </span><br>
-          Work History: <textarea rows="3" cols="30" name="work_history"> {{$infors->work_history}}</textarea> <span class="field"> {{$infors->work_history}} </span><br>
-          Education: <textarea rows="3" cols="30" name="education">{{$infors->education}}</textarea> <span class="field"> {{$infors->education}} </span><br>
-          Languages: <textarea rows="2" cols="30" name="languages"> {{$infors->languages}}</textarea><span class="field"> {{$infors->languages}} </span><br>
-          <input type="submit" value="update">
-          @if (count($errors) > 0)
-          <div class="alert alert-danger">
-            <ul>
-              @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-              @endforeach
-            </ul>
-          </div>
-          @endif
-        </form>
-        @else
-        @if($isMe)
-        <form action="/profile/{{$username}}/portfolio" method="post" >
-          {!! csrf_field() !!}
-          Overview : <textarea rows="3" cols="30" name="overview" placeholder="say something about your self" > </textarea><br>
-          Skills : <textarea rows="3" cols="30" name="skills" placeholder="ex.web programming"></textarea><br>
-          Achievements: <textarea rows="3" cols="30" name="achievements" placeholder="ex.your success" ></textarea><br>
-          Work History: <textarea rows="3" cols="30" name="work_history" placeholder="ex.places where you work"></textarea><br>
-          Education: <textarea rows="3" cols="30" name="education" placeholder="ex.your university name"></textarea><br>
-          Languages: <textarea rows="2" cols="30" name="languages" placeholder="ex.english"></textarea><br>
-          <input type="submit" value="store" >
-          @if (count($errors) > 0)
-          <div class="alert alert-danger">
-            <ul>
-              @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-              @endforeach
-            </ul>
-          </div>
-          @endif
-        </form>
-        @else
-        this user have no information
+        @if (count($errors) > 0)
+        <div class="alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
         @endif
-        @endif
-      </div>
+      </form>
+      @else
       @if($isMe)
+      <form action="/profile/{{$username}}/portfolio" method="post" >
+        {!! csrf_field() !!}
+          <table>
+          <tr><td class="f-label">Overview </td><td class="f-input"> <textarea rows="3" cols="30" name="overview" placeholder="say something about your self" > </textarea><br></td></tr>
+          <tr><td class="f-label">Skills </td><td class="f-input"> <textarea rows="3" cols="30" name="skills" placeholder="ex.web programming"></textarea><br></td></tr>
+          <tr><td class="f-label">Achievments </td><td class="f-input"> <textarea rows="3" cols="30" name="achievements" placeholder="ex.your success" ></textarea><br></td></tr>
+          <tr><td class="f-label">Work History </td><td class="f-input"> <textarea rows="3" cols="30" name="work_history" placeholder="ex.places where you work"></textarea><br></td></tr>
+          <tr><td class="f-label">Education </td><td class="f-input"> <textarea rows="3" cols="30" name="education" placeholder="ex.your university name"></textarea><br></td></tr>
+         <tr><td class="f-label">Languages</td><td class="f-input"><textarea rows="2" cols="30" name="languages" placeholder="ex.english"></textarea><br><br>
+             </td>
+            </tr>
+        
+          </table>
+        <input type="submit" value="store" >
+        @if (count($errors) > 0)
+        <div class="alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+        @endif
+      </form>
+      @else
+      this user have no information
+      @endif
+      @endif
+      @if($isMe)
+      <br>
       <form action="/profile/{{$username}}/portfolio/attach" method="post" enctype="multipart/form-data">
         {!! csrf_field() !!}
         <input type="file" name="filename">
-        <input type="submit">
+        <input class="btn btn-default" type="submit" value="Upload">
       </form>
       @endif
       <?php // TODO: show attacment  ?>
@@ -140,20 +148,12 @@
               </tr>
             </tbody>
           </table>
-
           @endif
           @endforeach
-
-
-
-
           @endif
-
           <?php // TODO: سعاد اعمليها :  كبسة تفتح بوب اب لرفع الفايل  ?>
           <?php // TODO: url down  ?>
-          <br><a href="/profile/{{$username}}" > Back </a>
         </div>
       </div>
     </div>
-
     @endsection

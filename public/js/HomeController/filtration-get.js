@@ -10,6 +10,19 @@ filters available:
 */
 
 $(document).ready(function(){
+
+  var content = function(value){
+    return '<div class="col-md-12 questions-stream-item">'+
+    '<a class="q-user-card no-anchor-style pointer-cursor" href="/profile/' + value.user.name + '">'+
+    '<img class="q-user-img img-circle" src="/images/user.png" width="50"/>'+
+    '<span class="q-user-name">'+value.user.name+'</span>'+
+    '</a>'+
+    '<h3 class="q-title">'+
+    '<a class="no-anchor-style pointer-cursor" href="/question/' + value.id + '">' + value.title + '</a>'+
+    '</h3>'+
+    '</div>';
+  };
+
   filterYourTopicsFeed();
   $('#topic_filter').css({visibility: 'hidden'});
 
@@ -55,15 +68,7 @@ $(document).ready(function(){
       success: function(response){
         // console.log(response.questions);
         response.questions.forEach(function(value, key){
-          $('#questionsList').append(
-            '<div class="col-md-12">'+
-            '<hr>'+
-            '<a href="/profile/' + value.user.name + '">' + value.user.name + '</a>'+
-            '<h1>'+
-            '<a href="/question/' + value.id + '">' + value.title + '</a>'+
-            '</h1>'+
-            '</div>'
-          );
+          $('#questionsList').append(content(value));
         });
       },
       error: function(error){
@@ -79,15 +84,7 @@ $(document).ready(function(){
       type: 'GET',
       success: function(response){
         response.questions.forEach(function(value, key){
-          $('#questionsList').append(
-            '<div class="col-md-12">'+
-            '<hr>'+
-            '<a href="/profile/' + value.user.name + '">' + value.user.name + '</a>'+
-            '<h1>'+
-            '<a href="/question/' + value.id + '">' + value.title + '</a>'+
-            '</h1>'+
-            '</div>'
-          );
+          $('#questionsList').append(content(value));
         });
       },
       error: function(error){
@@ -103,15 +100,7 @@ $(document).ready(function(){
       type: 'GET',
       success: function(response){
         response.questions.forEach(function(value, key){
-          $('#questionsList').append(
-            '<div class="col-md-12">'+
-            '<hr>'+
-            '<a href="/profile/' + value.user.name + '">' + value.user.name + '</a>'+
-            '<h1>'+
-            '<a href="/question/' + value.id + '">' + value.title + '</a>'+
-            '</h1>'+
-            '</div>'
-          );
+          $('#questionsList').append(content(value));
         });
       },
       error: function(error){
@@ -127,15 +116,7 @@ $(document).ready(function(){
       type: 'GET',
       success: function(response){
         response.questions.forEach(function(value, key){
-          $('#questionsList').append(
-            '<div class="col-md-12">'+
-            '<hr>'+
-            '<a href="/profile/' + value.user.name + '">' + value.user.name + '</a>'+
-            '<h1>'+
-            '<a href="/question/' + value.id + '">' + value.title + '</a>'+
-            '</h1>'+
-            '</div>'
-          );
+          $('#questionsList').append(content(value));
         });
       },
       error: function(error){
@@ -151,15 +132,7 @@ $(document).ready(function(){
       type: 'GET',
       success: function(response){
         response.questions.forEach(function(value, key){
-          $('#questionsList').append(
-            '<div class="col-md-12">'+
-            '<hr>'+
-            '<a href="/profile/' + value.user.name + '">' + value.user.name + '</a>'+
-            '<h1>'+
-            '<a href="/question/' + value.id + '">' + value.title + '</a>'+
-            '</h1>'+
-            '</div>'
-          );
+          $('#questionsList').append(content(value));
         });
       },
       error: function(error){

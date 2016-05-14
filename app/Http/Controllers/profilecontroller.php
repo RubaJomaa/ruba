@@ -33,7 +33,7 @@ class profilecontroller extends Controller
       $questions_answered_to =
         \App\Question::join('answers', 'questions.id', '=', 'answers.question_id')
                       ->where('answers.user_id', $user->id)
-                      ->select('questions.id', 'questions.title')
+                      ->select('questions.id', 'questions.title', 'questions.question_body')
                       ->distinct()
                       ->get();
       return view('viewsContainer.profile.userProfile', compact(['username', 'questions', 'questions_answered_to', 'questions_count', 'answers_count', 'likes_count']));
@@ -48,13 +48,16 @@ class profilecontroller extends Controller
     return view('errors.404');
     else
     {
+      $questions_count = \App\Question::where('user_id', $user->id)->count();
+      $answers_count = \App\Answer::where('user_id', $user->id)->count();
+      $likes_count = \App\Like::where('user_id', $user->id)->count();
       $isMe=false;
       if($user->id == Auth::user()->id)
       $isMe=true;
       $infors= \App\Portfolio::where('user_id',$user->id)->first();
 
       $attaches= \App\User_attachment::where('user_id',$user->id)->first();
-      return view('viewsContainer.profile.portfolio', compact(['username','infors','isMe','entries','attaches']));
+      return view('viewsContainer.profile.portfolio', compact(['username','infors','isMe','entries','attaches', 'questions_count', 'answers_count', 'likes_count']));
     }
   }
 
@@ -124,11 +127,14 @@ class profilecontroller extends Controller
     return view('errors.404');
     else
     {
+      $questions_count = \App\Question::where('user_id', $user->id)->count();
+      $answers_count = \App\Answer::where('user_id', $user->id)->count();
+      $likes_count = \App\Like::where('user_id', $user->id)->count();
       $isMe=false;
       if($user->id == Auth::user()->id)
       $isMe=true;
       $infos= \App\ProfileInfo::where('user_id',$user->id)->first();
-      return view('viewsContainer.profile.profileInfo', compact(['username','infos','isMe']));
+      return view('viewsContainer.profile.profileInfo', compact(['username','infos','isMe', 'questions_count', 'answers_count', 'likes_count']));
 
     }
   }
@@ -204,11 +210,14 @@ class profilecontroller extends Controller
     return view('errors.404');
     else
     {
+      $questions_count = \App\Question::where('user_id', $user->id)->count();
+      $answers_count = \App\Answer::where('user_id', $user->id)->count();
+      $likes_count = \App\Like::where('user_id', $user->id)->count();
       $isMe=false;
       if($user->id == Auth::user()->id)
       $isMe=true;
       $cinfos= \App\Contact::where('user_id',$user->id)->first();
-      return view('viewsContainer.profile.contact', compact(['username','cinfos','isMe']));
+      return view('viewsContainer.profile.contact', compact(['username','cinfos','isMe', 'questions_count', 'answers_count', 'likes_count']));
 
     }
   }
@@ -237,6 +246,7 @@ class profilecontroller extends Controller
       $contact->save();
       return back();
     }
+
   }
 
   public function updateContact(Request $request, $username)
@@ -310,6 +320,9 @@ class profilecontroller extends Controller
       return view('errors.404');
     else
     {
+      $questions_count = \App\Question::where('user_id', $user->id)->count();
+      $answers_count = \App\Answer::where('user_id', $user->id)->count();
+      $likes_count = \App\Like::where('user_id', $user->id)->count();
       $isMe=false;
       if($user->id == Auth::user()->id)
         $isMe=true;
@@ -317,7 +330,7 @@ class profilecontroller extends Controller
       $user_topics = $x->get();
       $user_topics_ids = $x->select('users_topics.topic_id')->get();
       $new_topics = \App\Topic::whereNotIn('id', $user_topics_ids)->get();
-      return view('viewsContainer.profile.topics', compact(['username','user_topics','new_topics', 'isMe']));
+      return view('viewsContainer.profile.topics', compact(['username','user_topics','new_topics', 'isMe', 'questions_count', 'answers_count', 'likes_count']));
     }
   }
 
@@ -362,10 +375,13 @@ class profilecontroller extends Controller
     return view('errors.404');
     else
     {
+      $questions_count = \App\Question::where('user_id', $user->id)->count();
+      $answers_count = \App\Answer::where('user_id', $user->id)->count();
+      $likes_count = \App\Like::where('user_id', $user->id)->count();
        $questions = \App\Question::join('questions_library' , 'questions.id',
         '=','questions_library.question_id')->where('questions_library.user_id'
          , $userId)->select('questions.id','title')->get();
-       return view('viewsContainer.profile.library', compact(['username','questions']));
+       return view('viewsContainer.profile.library', compact(['username','questions', 'questions_count', 'answers_count', 'likes_count']));
     }
   }
 

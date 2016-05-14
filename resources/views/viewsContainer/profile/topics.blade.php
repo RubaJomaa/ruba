@@ -1,11 +1,10 @@
-@extends('layouts.app')
-@section('content')
+@extends('layouts.profile-master')
 
+@section('profile-content')
 
 <div class="container" style="opacity:0.9">
   <div class="container-fluid">
-    <div class="col-md-10 col-md-offset-1">
-      <div class="panel panel-default">
+    <div class="well profile-inner-container col-md-10">
         @if($isMe)
         <form action="/profile/{{Auth::user()->name}}/user_topics/add" method="post">
           {!! csrf_field() !!}
@@ -41,13 +40,11 @@
             </div>
           </form>
           @endforeach
-          @else
-           No topics for this user .
-          @endif
         </div>
-        <a href="/profile/{{$username}}" > Back </a>
       </div>
-    </div>
+      @else
+        No topics for this user
+      @endif
   </div>
 
   @endsection

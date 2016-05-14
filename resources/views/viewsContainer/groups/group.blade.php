@@ -40,7 +40,7 @@
       {!! csrf_field() !!}
       <div name="groupAnswerEditor" id="groupAnswerEditor" rows="10" cols="80" contenteditable="true"></div>
       <br>
-      <button name="answer" class="btn btn-success" type="submit">Answer</button>
+      <button name="answer" class="post-ask-button" type="submit">Answer</button>
     </form>
     <br><hr>
     <div class="group-opinions">

@@ -11,15 +11,17 @@ $(document).ready(function(){
 
   function init()
   {
+
     user_name = username.replace("{", "").replace("}", "");
     newQuestionHTML = function(user_name, Q_id, Q_title){
-
-      return '<hr>' +
-      '<div class="col-md-12">' +
-      "<a href=\"\">" + user_name + "</a>"+
-      '<h1>' +
-      "<a href=\"\">" + Q_title + "</a>"
-      '</h1>' +
+      return '<div class="col-md-12 questions-stream-item">'+
+      '<a class="q-user-card no-anchor-style pointer-cursor" href="/profile/' + user_name + '">'+
+      '<img class="q-user-img img-circle" src="/images/user.png" width="50"/>'+
+      '<span class="q-user-name">'+user_name+'</span>'+
+      '</a>'+
+      '<h3 class="q-title">'+
+      '<a class="no-anchor-style pointer-cursor" href="">' + Q_title + '</a>'+
+      '</h3>'+
       '</div>';
     };
 

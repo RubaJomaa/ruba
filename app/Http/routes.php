@@ -62,6 +62,7 @@ Route::group(['middleware' => 'web'], function () {
   Route::get('/articles', 'ArticlesController@index');
   Route::get('/group/{group_id}/article', 'ArticlesController@getArticleComposition');
   Route::get('/article/{article_id}/json', 'ArticlesController@getArticleJSON');
+  Route::get('/article/{id}', 'ArticlesController@getArticle');
   Route::post('/article/{article_id}', 'ArticlesController@updateArticle');
   Route::post('/article/{article_id}/publish', 'ArticlesController@publishArticle');
 

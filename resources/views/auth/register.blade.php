@@ -1,11 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
+<style media="screen">
+    body
+{
+ background: url("{{asset('images/b.jpg')}}") no-repeat center center fixed;
+ background-size: 100% auto;
+        }
+
+
+.fa-btn {
+  margin-right: 6px;
+}
+</style>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
+                <div class="panel-heading askworld-header">Register</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {!! csrf_field() !!}
@@ -68,7 +80,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="askworld-btn">
                                     <i class="fa fa-btn fa-user"></i>Register
                                 </button>
                             </div>

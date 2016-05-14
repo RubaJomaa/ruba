@@ -20,15 +20,19 @@
       </div>
       @endforeach
     </div>
+    <br>
     <div class="col-md-8 col-md-offset-1">
-      <form id="saveArticle" method="post">
+      <form class="col-md-3 col-md-offset-2" id="saveArticle" method="post">
         {!! csrf_field() !!}
-        <button type="submit" name="save">Save</button>
+        <button type="submit" class="askworld-btn" name="save">Save</button>
       </form>
-      <form id="publishArticle" method="post">
+      <form class="col-md-3 col-md-offset-2" id="publishArticle" method="post">
         {!! csrf_field() !!}
-        <button type="submit" name="publish">Publish</button>
+        <button type="submit" class="askworld-btn" name="publish">Publish</button>
       </form>
+    </div>
+    <br><br><br>
+    <div class="col-md-8 col-md-offset-1">
       <div name="Article" id="Article" rows="10" contenteditable="true"></div>
     </div>
   </section>

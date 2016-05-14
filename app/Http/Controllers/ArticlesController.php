@@ -24,6 +24,18 @@ class ArticlesController extends Controller
     ]);
   }
 
+  public function getArticle($id)
+  {
+    $article = \App\Article::find($id);
+    $members = \App\Member::join('groups', 'members.group_id', '=', 'groups.id')
+                            ->join('articles', 'groups.id', '=', 'articles.group_id')
+                            ->where('articles.id', $article->id)
+                            ->join('users', 'members.user_id', '=', 'users.id')
+                            ->select('users.id', 'users.name')
+                            ->get();
+    return view('viewsContainer.articles.article', compact(['article', 'members']));
+  }
+
   public function getArticleComposition($group_id)
   {
     $library = \App\Answer::join('library', 'answers.id', '=', 'library.answer_id')
