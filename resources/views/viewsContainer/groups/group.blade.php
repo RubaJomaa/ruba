@@ -17,7 +17,6 @@
     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
       <li><a href="{{url('/group/'.$group->id.'/article')}}">Edit The Article</a></li>
       <li role="separator" class="divider"></li>
-      <li><a href="">Do Sth Else</a></li>
     </ul>
   </div>
 </div>

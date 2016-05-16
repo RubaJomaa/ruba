@@ -63,6 +63,7 @@ $(document).ready(function(){
             </button>
           </form>
         </div>
+          @if($isMe)
         <div class="col-md-1">
           <button type="button" class="go-to-create-grp-wizard btn btn-default btn-lg" data-toggle="tooltip" title="Create Group Discussion" name="createGroup">
             <a href="{{url('/groups/new/'.$question->id.'/wizard')}}">
@@ -70,7 +71,6 @@ $(document).ready(function(){
             </a>
           </button>
         </div>
-        @if($isMe)
         <div class="col-md-1">
           <form action="/question/{{$question->id}}" method="post">
             {!! csrf_field() !!}

@@ -235,8 +235,8 @@ class profilecontroller extends Controller
       return view('errors.401');//you can create a 401 page (unauthorized)
       $this->validate($request, [
         'email' => 'required',
-        'phone_number' => 'required|integer',
-        'telephone_number' => 'required|integer',
+        'phone_number' => 'required',
+        'telephone_number' => 'required',
       ]);
       $contact = new \App\Contact;
       $contact->user_id = $user->id;
@@ -254,8 +254,8 @@ class profilecontroller extends Controller
     $user = $this->checkUsername($username);
     $this->validate($request, [
       'email' => 'required',
-      'phone_number' => 'required|integer',
-      'telephone_number' => 'required|integer',
+      'phone_number' => 'required',
+      'telephone_number' => 'required',
     ]);
     if(!$user)
     return view('errors.404');
