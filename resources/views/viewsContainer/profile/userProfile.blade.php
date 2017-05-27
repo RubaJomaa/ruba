@@ -16,9 +16,6 @@
           <div class="qs-item">
             <a class="no-anchor-style pointer-cursor" href="{{URL('/question/'.$question->id )}}"> {!! $question->title !!}</a>
             <hr>
-            <p>
-              {!! str_limit($question->question_body, 100) !!}
-            </p>
           </div>
           @endforeach
         </div>
@@ -28,9 +25,6 @@
           <div class="ans_qs_item">
             <a class="no-anchor-style pointer-cursor" href="{{URL('/question/'.$question->id )}}"> {!! $question->title !!}</a>
             <hr>
-            <p>
-              {!! str_limit($question->question_body, 100) !!}
-            </p>
           </div>
           @endforeach
         </div>
